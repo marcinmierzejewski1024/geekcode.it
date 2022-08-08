@@ -13,176 +13,193 @@ struct GeekCode
 {
     var specs:[GeekCodeSpecialization]?;
     var categories = [GeekCodeCategory]();
+    var categoriesModifiers = [GeekCodeCategory:GeekCodeModifier]();
+    var categoriesGrades = [GeekCodeCategory:GeekCodeGrading]();
+
 
     
 }
 
-enum GeekCodeCategory
+enum GeekCodeCategory : CaseIterable, Hashable
 {
+    
     //Appearance
-    case Age(GeekCodeModifier?,GeekCodeGrading?)
-    case Beard(GeekCodeModifier?,GeekCodeGrading?)
-    case BeardMustache(GeekCodeModifier?,GeekCodeGrading?)
-    case BeardSideburns(GeekCodeModifier?,GeekCodeGrading?)
-    case BeardBushyEyebrows(GeekCodeModifier?,GeekCodeGrading?)
-    case Clothing(GeekCodeModifier?,GeekCodeGrading?)
-    case ClothingCrossDresser(GeekCodeGrading?)
-    case ClothingDontCare(GeekCodeGrading?)
-    case Dimensions(GeekCodeModifier?,GeekCodeGrading?,GeekCodeModifier?,GeekCodeGrading?)
+    case Age
+    case Beard
+    case BeardMustache
+    case BeardSideburns
+    case BeardBushyEyebrows
+    case Clothing
+    case ClothingCrossDresser
+    case ClothingDontCare
+    case Dimensions
     
     
     //Computers
-    case Computer(GeekCodeModifier?,GeekCodeGrading?)
+    case Computer
     
-    case Unix(GeekCodeModifier?,GeekCodeGrading?)
-    case Linux(GeekCodeModifier?,GeekCodeGrading?)
-    case RPM(GeekCodeModifier?,GeekCodeGrading?)
-    case Cwntos(GeekCodeModifier?,GeekCodeGrading?)
-    case Fedora(GeekCodeModifier?,GeekCodeGrading?)
-    case Opensuse(GeekCodeModifier?,GeekCodeGrading?)
-    case Urpmi(GeekCodeModifier?,GeekCodeGrading?)
-    case Apt_rpm(GeekCodeModifier?,GeekCodeGrading?)
-    case Debian(GeekCodeModifier?,GeekCodeGrading?)
-    case Ubuntu(GeekCodeModifier?,GeekCodeGrading?)
-    case Thirdparty(GeekCodeModifier?,GeekCodeGrading?)
-    case Mepis(GeekCodeModifier?,GeekCodeGrading?)
-    case Knoppix(GeekCodeModifier?,GeekCodeGrading?)
-    case Pacman(GeekCodeModifier?,GeekCodeGrading?)
-    case Gentoo(GeekCodeModifier?,GeekCodeGrading?)
-    case Slackware(GeekCodeModifier?,GeekCodeGrading?)
-    case Other(GeekCodeModifier?,GeekCodeGrading?)
-    case SunOS_Solaris(GeekCodeModifier?,GeekCodeGrading?)
-    case AIX(GeekCodeModifier?,GeekCodeGrading?)
-    case HPUX(GeekCodeModifier?,GeekCodeGrading?)
-    case IRIX(GeekCodeModifier?,GeekCodeGrading?)
-    case SCO_Unix(GeekCodeModifier?,GeekCodeGrading?)
-    case UnixNot_listed(GeekCodeModifier?,GeekCodeGrading?)
+    case Unix
+    case Linux
+    case RPM
+    case Cwntos
+    case Fedora
+    case Opensuse
+    case Urpmi
+    case Apt_rpm
+    case Debian
+    case Ubuntu
+    case Thirdparty
+    case Mepis
+    case Knoppix
+    case Pacman
+    case Gentoo
+    case Slackware
+    case Other
+    case SunOS_Solaris
+    case AIX
+    case HPUX
+    case IRIX
+    case SCO_Unix
+    case UnixNot_listed
     
     //programing
-    case Java(GeekCodeModifier?,GeekCodeGrading?)
-    case Cprogramminglang(GeekCodeModifier?,GeekCodeGrading?)
-    case Cplusplus(GeekCodeModifier?,GeekCodeGrading?)
-    case Csharp(GeekCodeModifier?,GeekCodeGrading?)
-    case Visualbasic(GeekCodeModifier?,GeekCodeGrading?)
-    case Python(GeekCodeModifier?,GeekCodeGrading?)
-    case Javascript(GeekCodeModifier?,GeekCodeGrading?)
-    case Php(GeekCodeModifier?,GeekCodeGrading?)
-    case Objectivec(GeekCodeModifier?,GeekCodeGrading?)
-    case Sql(GeekCodeModifier?,GeekCodeGrading?)
-    case Perl(GeekCodeModifier?,GeekCodeGrading?)
-    case Ruby(GeekCodeModifier?,GeekCodeGrading?)
-    case Matlab(GeekCodeModifier?,GeekCodeGrading?)
-    case Assembly(GeekCodeModifier?,GeekCodeGrading?)
-    case Go(GeekCodeModifier?,GeekCodeGrading?)
-    case R(GeekCodeModifier?,GeekCodeGrading?)
-    case Swift(GeekCodeModifier?,GeekCodeGrading?)//not added to standard
-    case Kotlin(GeekCodeModifier?,GeekCodeGrading?)//not added to standard
+    case Java
+    case Cprogramminglang
+    case Cplusplus
+    case Csharp
+    case Visualbasic
+    case Python
+    case Javascript
+    case Php
+    case Objectivec
+    case Sql
+    case Perl
+    case Ruby
+    case Matlab
+    case Assembly
+    case Go
+    case R
+    case Swift//not added to standard
+    case Kotlin//not added to standard
     
-    func symbol() -> String {
+    
+    static func from(key:String) -> GeekCodeCategory?
+    {
+        for catCase in self.allCases {
+            if key.lowercased() == catCase.key().lowercased() {
+                return catCase
+            }
+        }
+        
+        return nil;
+
+    }
+    
+    func key() -> String {
             
         switch self {
 
-        case .Age(_, _):
+        case .Age:
             return "a"
-        case .Beard(_, _):
+        case .Beard:
             return "b"
-        case .BeardMustache(_, _):
+        case .BeardMustache:
             return "bm"
-        case .BeardSideburns(_, _):
+        case .BeardSideburns:
             return "bs"
-        case .BeardBushyEyebrows(_, _):
+        case .BeardBushyEyebrows:
             return "bb"
-        case .Clothing(_, _):
+        case .Clothing:
             return "c"
-        case .ClothingCrossDresser(_):
+        case .ClothingCrossDresser:
             return "cx"
-        case .ClothingDontCare(_):
+        case .ClothingDontCare:
             return "cpu"
-        case .Dimensions(_, _, _, _):
+        case .Dimensions:
             return "d"
-        case .Computer(_, _):
+        case .Computer:
             return "c"
-        case .Unix(_, _):
+        case .Unix:
             return "u"
-        case .Linux(_, _):
+        case .Linux:
             return "ul"
-        case .RPM(_, _):
+        case .RPM:
             return "ulr"
-        case .Cwntos(_, _):
+        case .Cwntos:
             return "ulrc"
-        case .Fedora(_, _):
+        case .Fedora:
             return "ulrf"
-        case .Opensuse(_, _):
+        case .Opensuse:
             return "ulro"
-        case .Urpmi(_, _):
+        case .Urpmi:
             return "ulru"
-        case .Apt_rpm(_, _):
+        case .Apt_rpm:
             return "ulra"
-        case .Debian(_, _):
+        case .Debian:
             return "uld"
-        case .Ubuntu(_, _):
+        case .Ubuntu:
             return "uldu"
-        case .Thirdparty(_, _):
+        case .Thirdparty:
             return "uldux"
-        case .Mepis(_, _):
+        case .Mepis:
             return "uldm"
-        case .Knoppix(_, _):
+        case .Knoppix:
             return "uldk"
-        case .Pacman(_, _):
+        case .Pacman:
             return "ulp"
-        case .Gentoo(_, _):
+        case .Gentoo:
             return "ulg"
-        case .Slackware(_, _):
+        case .Slackware:
             return "uls"
-        case .Other(_, _):
+        case .Other:
             return "ul*"
-        case .SunOS_Solaris(_, _):
+        case .SunOS_Solaris:
             return "us"
-        case .AIX(_, _):
+        case .AIX:
             return "ua"
-        case .HPUX(_, _):
+        case .HPUX:
             return "uh"
-        case .IRIX(_, _):
+        case .IRIX:
             return "ui"
-        case .SCO_Unix(_, _):
+        case .SCO_Unix:
             return "uc"
-        case .UnixNot_listed(_, _):
+        case .UnixNot_listed:
             return "u*"
         case .Java:
             return "lj"
-        case .Cprogramminglang(_, _):
+        case .Cprogramminglang:
             return "lc"
-        case .Cplusplus(_, _):
+        case .Cplusplus:
             return "lcpp"
-        case .Csharp(_, _):
+        case .Csharp:
             return "lc#"
-        case .Visualbasic(_, _):
+        case .Visualbasic:
             return "lvb"
-        case .Python(_, _):
+        case .Python:
             return "lp"
-        case .Javascript(_, _):
+        case .Javascript:
             return "ljs"
-        case .Php(_, _):
+        case .Php:
             return "lphp"
-        case .Objectivec(_, _):
+        case .Objectivec:
             return "loc"
-        case .Sql(_, _):
+        case .Sql:
             return "lsql"
-        case .Perl(_, _):
+        case .Perl:
             return "lp"
-        case .Ruby(_, _):
+        case .Ruby:
             return "lru"
-        case .Matlab(_, _):
+        case .Matlab:
             return "lm"
-        case .Assembly(_, _):
+        case .Assembly:
             return "lasm"
-        case .Go(_, _):
+        case .Go:
             return "lgo"
-        case .R(_, _):
+        case .R:
             return "lr"
-        case .Swift(_, _):
+        case .Swift:
             return "lsw"
-        case .Kotlin(_, _):
+        case .Kotlin:
             return "lko"
         }
         
@@ -192,14 +209,32 @@ enum GeekCodeCategory
 }
 
 
-enum GeekCodeModifier : String
+enum GeekCodeModifier
 {
-    case RIGID = "@"
-    case CROSS_OVER = "()"
-    case WANNABE = ">"
-    case PROFESSIONAL = "$"
-    case NO_IDEA = "?"
-    case REFUSE = "!"
+    case RIGID
+    case CROSS_OVER(GeekCodeGrading?)
+    case WANNABE(GeekCodeGrading?)
+    case PROFESSIONAL
+    case NO_IDEA
+    case REFUSE
+    
+    
+    func regexForCodeModifier() -> String {
+        switch self {
+        case .RIGID:
+            return "@%@"
+        case .CROSS_OVER:
+            return "(%@)"
+        case .WANNABE:
+            return ">%@"
+        case .PROFESSIONAL:
+            return "%@$"
+        case .NO_IDEA:
+            return "%@?"
+        case .REFUSE:
+            return "%@!"
+        }
+    }
     
 }
 

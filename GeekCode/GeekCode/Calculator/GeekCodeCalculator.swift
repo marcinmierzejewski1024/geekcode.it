@@ -25,7 +25,7 @@ class GeekCodeCalculator
         }
         
         for nextPart in parts {
-            if let foundCategory = self.categoryFrom(string: nextPart) {
+            if let foundCategory = self.categoryFrom(input: nextPart) {
                 result.categories.append(foundCategory)
             }
         }
@@ -84,9 +84,48 @@ class GeekCodeCalculator
     }
     
     
-    func categoryFrom(string:String) -> GeekCodeCategory? {
-//TODO: impl
-        return GeekCodeCategory.Age(nil, .plusPlus)
+    func categoryFrom(input:String) -> GeekCodeCategory? {
+
+        var result : [GeekCodeSpecialization];
+
+        let string = input.uppercased();
+        
+        let capturePattern = #"(?:[A-Z]+)"#
+        let captureRegex = try! NSRegularExpression(
+            pattern: capturePattern,
+            options: []
+        )
+        let stringRange = NSRange(
+            string.startIndex..<string.endIndex,
+            in: string
+        )
+
+        let matches = captureRegex.matches(
+            in: string,
+            options: [],
+            range: stringRange
+        )
+        
+        
+        
+
+        
+        for match in matches {
+            for rangeIndex in 0..<match.numberOfRanges {
+                let matchRange = match.range(at: rangeIndex)
+                
+                // Extract the substring matching the capture group
+                if let substringRange = Range(matchRange, in: string) {
+                    let capture = String(string[substringRange])
+                    let category = GeekCodeCategory.from(key: capture)
+                    return category
+                }
+            }
+        }
+        
+        
+        
+        return nil
     }
     
     func from(gc:GeekCode) -> String {
