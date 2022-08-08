@@ -40,12 +40,12 @@ class GeekCodeCalculator
         var result : [GeekCodeSpecialization];
         var specStrings = Set<String>();
 
-        var string = input;
-        if string.lowercased().starts(with: "g") {
+        var string = input.uppercased();
+        if string.starts(with: "G") {
             string.removeFirst()
         }
         
-        let capturePattern = #"(?:[A-Z]{1,3})"#
+        let capturePattern = #"(?:[A-Z!]{1,3})"#
         let captureRegex = try! NSRegularExpression(
             pattern: capturePattern,
             options: []
@@ -67,8 +67,6 @@ class GeekCodeCalculator
             for rangeIndex in 0..<match.numberOfRanges {
                 let matchRange = match.range(at: rangeIndex)
                 
-                if matchRange == stringRange { continue }
-                
                 // Extract the substring matching the capture group
                 if let substringRange = Range(matchRange, in: string) {
                     let capture = String(string[substringRange])
@@ -78,7 +76,7 @@ class GeekCodeCalculator
         }
         
         result = specStrings.compactMap({ candidate in
-            return GeekCodeSpecialization.init(rawValue: candidate)
+            return GeekCodeSpecialization.from(key: candidate)
         })
         
         

@@ -222,105 +222,106 @@ enum GeekCodeGrading
 
 
 
-enum GeekCodeSpecialization : String {
-    case B
-    case C
-    case CA
-    case CS
-    case CC
-    case E
-    case ED
-    case FA
-    case G
-    case H
-    case IT
-    case J
-    case LS
-    case MC
-    case M
-    case MD
-    case MU
-    case PA
-    case P
-    case S
-    case SS
-    case TW
-    case O
-    case U
-    case AT
+enum GeekCodeSpecialization : String, CaseIterable {
+   
+    case BUSINESS_GEEK
+    case GEEK_OF_THE_CLASSICS
+    case GEEK_OF_COMMERCIAL_ART
+    case GEEK_OF_COMPUTER_SCIENCE
+    case COMMUNICATIONS_GEEK
+    case GEEK_OF_ENGINEERING
+    case EDUCATION_GEEK
+    case GEEK_OF_FINE_ARTS
+    case GEEK_OF_GOVERNMENT
+    case GEEK_OF_HUMANITIES
+    case GEEK_INFORMATION_TECHNOLOGY
+    case GEEK_OF_JURISPRUDENCE
+    case GEEK_OF_LIBRARY_SCIENCE
+    case MASS_COMMUNICATION_GEEK
+    case GEEK_OF_MATHEMATICS
+    case MEDICINE_GEEK
+    case MUSIC_GEEK
+    case GEEK_OF_THE_PERFORMING_ARTS
+    case GEEK_OF_PHILOSOPHY
+    case GEEK_OF_THE_EXACT_SCIENCES
+    case GEEK_OF_SOCIAL_SCIENCES
+    case GEEK_OF_TECHNICAL_MAGAZINE
+    case OTHER_GEEK
+    case UNDECIDED_GEEK
+    case THE_GEEK_OF_EVERYTHING
     case WITHOUT
     
-    func symbol() -> String {
-        switch self {
-            case .WITHOUT:
-            return "!";
-            
-        default:
-            return "G\(self.rawValue)"
-            
-                
-        }
-    }
+    
     
     func name() -> String {
         
-        return NSLocalizedString(self.key(), comment: "");
+        return NSLocalizedString(self.rawValue, comment: "");
+    }
+    
+    static func from(key:String) -> GeekCodeSpecialization? {
+        for specCase in self.allCases {
+            if key == specCase.key() {
+                return specCase
+            }
+        }
+        
+        return nil;
     }
     
     func key() -> String{
         switch self {
-        case .B:
-            return "BUSINESS_GEEK"
-        case .C:
-            return "GEEK_OF_THE_CLASSICS"
-        case .CA:
-            return "GEEK_OF_COMMERCIAL_ART"
-        case .CS:
-            return "GEEK_OF_COMPUTER_SCIENCE"
-        case .CC:
-            return "COMMUNICATIONS_GEEK"
-        case .E:
-            return "GEEK_OF_ENGINEERING"
-        case .ED:
-            return "EDUCATION_GEEK"
-        case .FA:
-            return "GEEK_OF_FINE_ARTS"
-        case .G:
-            return "GEEK_OF_GOVERNMENT"
-        case .H:
-            return "GEEK_OF_HUMANITIES"
-        case .IT:
-            return "GEEK_INFORMATION_TECHNOLOGY"
-        case .J:
-            return "GEEK_OF_JURISPRUDENCE"
-        case .LS:
-            return "GEEK_OF_LIBRARY_SCIENCE"
-        case .MC:
-            return "MASS_COMMUNICATION_GEEK"
-        case .M:
-            return "GEEK_OF_MATHEMATICS"
-        case .MD:
-            return "MEDICINE_GEEK"
-        case .MU:
-            return "MUSIC_GEEK"
-        case .PA:
-            return "GEEK_OF_THE_PERFORMING_ARTS"
-        case .P:
-            return "GEEK_OF_PHILOSOPHY"
-        case .S:
-            return "GEEK_OF_THE_EXACT_SCIENCES"
-        case .SS:
-            return "GEEK_OF_SOCIAL_SCIENCES"
-        case .TW:
-            return "GEEK_OF_TECHNICAL_MAGAZINE"
-        case .O:
-            return "OTHER_GEEK"
-        case .U:
-            return "UNDECIDED_GEEK"
-        case .AT:
-            return "THE_GEEK_OF_EVERYTHING"
+        case .BUSINESS_GEEK:
+            return "B"
+        case .GEEK_OF_THE_CLASSICS:
+            return "C"
+        case .GEEK_OF_COMMERCIAL_ART:
+            return "CA"
+        case .GEEK_OF_COMPUTER_SCIENCE:
+            return "CS"
+        case .COMMUNICATIONS_GEEK:
+            return "CC"
+        case .GEEK_OF_ENGINEERING:
+            return "E"
+        case .EDUCATION_GEEK:
+            return "ED"
+        case .GEEK_OF_FINE_ARTS:
+            return "FA"
+        case .GEEK_OF_GOVERNMENT:
+            return "G"
+        case .GEEK_OF_HUMANITIES:
+            return "H"
+        case .GEEK_INFORMATION_TECHNOLOGY:
+            return "IT"
+        case .GEEK_OF_JURISPRUDENCE:
+            return "J"
+        case .GEEK_OF_LIBRARY_SCIENCE:
+            return "LS"
+        case .MASS_COMMUNICATION_GEEK:
+            return "MC"
+        case .GEEK_OF_MATHEMATICS:
+            return "M"
+        case .MEDICINE_GEEK:
+            return "MD"
+        case .MUSIC_GEEK:
+            return "MU"
+        case .GEEK_OF_THE_PERFORMING_ARTS:
+            return "PA"
+        case .GEEK_OF_PHILOSOPHY:
+            return "P"
+        case .GEEK_OF_THE_EXACT_SCIENCES:
+            return "S"
+        case .GEEK_OF_SOCIAL_SCIENCES:
+            return "SS"
+        case .GEEK_OF_TECHNICAL_MAGAZINE:
+            return "TW"
+        case .OTHER_GEEK:
+            return "O"
+        case .UNDECIDED_GEEK:
+            return "U"
+        case .THE_GEEK_OF_EVERYTHING:
+            return "AT"
         case .WITHOUT:
-            return "GEEK_WITHOUT_QUALIFICATIONS"
+            return "!"
 
 
   

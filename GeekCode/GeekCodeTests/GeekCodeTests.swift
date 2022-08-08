@@ -15,25 +15,42 @@ class GeekCodeTests: XCTestCase {
     func testSpecializationsFrom() throws {
         var specs = calculator.specializationsFrom(input: "GB/CS/TW")
         XCTAssert(specs?.count == 3)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.B))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.CS))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.TW))
-        
-        
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.BUSINESS_GEEK))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_TECHNICAL_MAGAZINE))
+
+
+
         specs = calculator.specializationsFrom(input: "klajfkldjslkW")
         XCTAssert(specs?.count == 0)
-        
-        
+
+
         specs = calculator.specializationsFrom(input: "GMD/MD/MUAUAUA")
         XCTAssert(specs?.count == 1)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MD))
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
+
         specs = calculator.specializationsFrom(input: "GMD/AT/MUAUAUA")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MD))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.AT))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
 
+
+        specs = calculator.specializationsFrom(input: "gat/md/MUAUAUA/")
+        XCTAssert(specs?.count == 2)
+        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
+
+        
+        specs = calculator.specializationsFrom(input: "G!")
+        XCTAssert(specs?.count == 1)
+        XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
+        
+        specs = calculator.specializationsFrom(input: "GMD/!/MUAUAUA")
+        XCTAssert(specs?.count == 2)
+        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
+
+        
         
         
     }
