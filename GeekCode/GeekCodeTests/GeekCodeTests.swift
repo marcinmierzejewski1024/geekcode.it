@@ -56,4 +56,72 @@ class GeekCodeTests: XCTestCase {
     }
     
     
+    
+    func testCategoryFrom() throws
+    {
+        var category = calculator.categoryFrom(string: "a++")!
+        
+        switch category {
+        case .Age(let modifier, let grader):
+            XCTAssert(true);
+            XCTAssert(modifier == .none)
+            XCTAssert(grader == .plusPlus)
+        default:
+            XCTAssert(false);
+        
+        }
+
+
+        category = calculator.categoryFrom(string: "S:")!
+        switch category {
+        case .Dimensions(let modifier, let grader,let modifier2,let grader2):
+            XCTAssert(true);
+            XCTAssert(modifier == .none)
+            XCTAssert(grader == .none)
+            XCTAssert(modifier2 == .none)
+            XCTAssert(grader2 == .none)
+        default:
+            XCTAssert(false);
+        
+        }
+        category = calculator.categoryFrom(string: "S+:+")!
+        switch category {
+        case .Dimensions(let modifier, let grader,let modifier2,let grader2):
+            XCTAssert(true);
+            XCTAssert(modifier == .none)
+            XCTAssert(grader == .plus)
+            XCTAssert(modifier2 == .none)
+            XCTAssert(grader2 == .plus)
+        default:
+            XCTAssert(false);
+        
+        }
+        category = calculator.categoryFrom(string: "S+:")!
+        switch category {
+        case .Dimensions(let modifier, let grader,let modifier2,let grader2):
+            XCTAssert(true);
+            XCTAssert(modifier == .none)
+            XCTAssert(grader == .plus)
+            XCTAssert(modifier2 == .none)
+            XCTAssert(grader2 == .none)
+        default:
+            XCTAssert(false);
+        
+        }
+        category = calculator.categoryFrom(string: "S:---")!
+        switch category {
+        case .Dimensions(let modifier, let grader,let modifier2,let grader2):
+            XCTAssert(true);
+            XCTAssert(modifier == .none)
+            XCTAssert(grader == .none)
+            XCTAssert(modifier2 == .none)
+            XCTAssert(grader2 == .minusMinusMinus)
+        default:
+            XCTAssert(false);
+        
+        }
+
+    }
+    
+    
 }

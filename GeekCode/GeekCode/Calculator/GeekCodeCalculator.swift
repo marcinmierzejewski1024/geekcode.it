@@ -85,9 +85,8 @@ class GeekCodeCalculator
     
     
     func categoryFrom(string:String) -> GeekCodeCategory? {
-        
-        
-        return nil;
+//TODO: impl
+        return GeekCodeCategory.Age(nil, .plusPlus)
     }
     
     func from(gc:GeekCode) -> String {
