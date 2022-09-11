@@ -9,12 +9,11 @@ import Foundation
 
 class GeekCodeCalculator
 {
-    func from(string:String) -> GeekCode? {
-        
-        
+    func from(string:String) throws -> GeekCode? {
         
         var result = GeekCode();
-        var parts = string.components(separatedBy: .whitespaces)
+        let replaced = string.replacingOccurrences(of: "_", with: " ")
+        var parts = replaced.components(separatedBy: .whitespaces)
         
         
         if let firstPart = parts.first {
@@ -26,14 +25,8 @@ class GeekCodeCalculator
         
         for nextPart in parts {
             if let foundCategory = self.categoryFrom(input: nextPart) {
-                result.categories.append(foundCategory)
-                
-                let modifiers = self.categoryModifiersFrom(input: nextPart, with: foundCategory)
-
-                result.categoriesModifiers[foundCategory] = modifiers
-
-                for modifier in modifiers {
-                    result.categoriesModifiersGrades[modifier] = self.gradeFrom(input: nextPart, with: modifier)
+                if let categoryItem = try self.categoryItemFrom(input: nextPart, with: foundCategory) {
+                    result.categories.append(categoryItem)
                 }
                 
             }
@@ -136,21 +129,52 @@ class GeekCodeCalculator
     }
     
     
-    func categoryModifiersFrom(input: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
-        var result = [GeekCodeModifier]()
+    func categoryItemFrom(input: String, with: GeekCodeCategory) throws -> GeekCodeCategoryItem? {
         
-        for potentialCase in GeekCodeModifier.allCases {
-            let caseRegexp = potentialCase.regexForCodeModifier()
+        guard let category = self.categoryFrom(input: input) else {
+            return nil
+        }
+        
+        var result = GeekCodeCategoryItem(category: category, part1Modifiers: [])
+        
+        let parts = input.components(separatedBy: ":")
+
+        
+        var i = 1
+        for part in parts {
             
+            let modifiers = self.categoryModifiersFrom(subitem: part, with: category)
+            switch i {
+            case 1:
+                result.part1Modifiers = modifiers
+            case 2:
+                result.part2Modifiers = modifiers
+            case 3:
+                result.part3Modifiers = modifiers
+            case 4:
+                result.part4Modifiers = modifiers
+            case 5:
+                result.part5Modifiers = modifiers
+            default:
+                throw "to many parts!"
+            }
+            i += 1
         }
         
         return result
     }
     
-    func gradeFrom(input:String, with: GeekCodeModifier) -> GeekCodeGrading {
+    func categoryModifiersFrom(subitem: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
+        var result = [GeekCodeModifier]()
+        for potentialCase in GeekCodeModifier.allCases {
+            let caseRegexp = potentialCase.regexForCodeModifier()
+            //TODO:compare reqgexp with subitem
+        }
         
-        return .normal
+        return result
+
     }
+    
     
     
     func from(gc:GeekCode) -> String {

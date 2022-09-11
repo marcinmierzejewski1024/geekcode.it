@@ -12,10 +12,17 @@ import Foundation
 struct GeekCode
 {
     var specs:[GeekCodeSpecialization]?;
-    var categories = [GeekCodeCategory]();
-    var categoriesModifiers = [GeekCodeCategory:[GeekCodeModifier]]();
-    var categoriesModifiersGrades = [GeekCodeModifier:GeekCodeGrading]();
+    var categories = [GeekCodeCategoryItem]();
+}
 
+struct GeekCodeCategoryItem {
+    var category: GeekCodeCategory
+    
+    var part1Modifiers : [GeekCodeModifier]
+    var part2Modifiers : [GeekCodeModifier]?
+    var part3Modifiers : [GeekCodeModifier]?
+    var part4Modifiers : [GeekCodeModifier]?
+    var part5Modifiers : [GeekCodeModifier]?
 
     
 }
@@ -92,13 +99,13 @@ enum GeekCodeCategory : CaseIterable, Hashable
         }
         
         return nil;
-
+        
     }
     
     func key() -> String {
-            
+        
         switch self {
-
+            
         case .Age:
             return "a"
         case .Beard:
@@ -212,15 +219,16 @@ enum GeekCodeCategory : CaseIterable, Hashable
 enum GeekCodeModifier : Hashable, CaseIterable
 {
     static var allCases: [GeekCodeModifier] = {
-        return [.RIGID(nil),CROSS_OVER(nil, nil),.WANNABE(nil, nil),.PROFESSIONAL(nil),.NO_IDEA(nil),.REFUSE(nil)]
+        return [.RIGID(nil,nil),CROSS_OVER(nil, nil),.WANNABE(nil, nil),.PROFESSIONAL(nil,nil),.NO_IDEA(nil,nil),.REFUSE(nil,nil)]
     }()
     
-    case RIGID(GeekCodeCategory?)
+    case RIGID(GeekCodeCategory?, GeekCodeGrading?)
     case CROSS_OVER(GeekCodeCategory?, GeekCodeGrading?)
     case WANNABE(GeekCodeCategory?, GeekCodeGrading?)
-    case PROFESSIONAL(GeekCodeCategory?)
-    case NO_IDEA(GeekCodeCategory?)
-    case REFUSE(GeekCodeCategory?)
+    case PROFESSIONAL(GeekCodeCategory?, GeekCodeGrading?)
+    case DEGREE(GeekCodeCategory?, GeekCodeGrading?)
+    case NO_IDEA(GeekCodeCategory?, GeekCodeGrading?)
+    case REFUSE(GeekCodeCategory?, GeekCodeGrading?)
     
     
     func regexForCodeModifier() -> String {
@@ -233,30 +241,28 @@ enum GeekCodeModifier : Hashable, CaseIterable
             return ">%@"
         case .PROFESSIONAL:
             return "%@$"
+        case .DEGREE:
+            return "%@^"
         case .NO_IDEA:
             return "%@?"
         case .REFUSE:
-            return "%@!"
+            return "!%@"
         }
     }
     
     func hash(into hasher: inout Hasher) {
         switch self {
             
-        case .RIGID(let category):
-            hasher.combine(category)
-        case .CROSS_OVER(let category, let grading):
+        case .RIGID(let category, let grading)
+            ,.CROSS_OVER(let category, let grading)
+            ,.WANNABE(let category, let grading)
+            ,.PROFESSIONAL(let category, let grading)
+            ,.DEGREE(let category, let grading)
+            ,.NO_IDEA(let category, let grading)
+            ,.REFUSE(let category, let grading):
             hasher.combine(category)
             hasher.combine(grading)
-        case .WANNABE(let category, let grading):
-            hasher.combine(category)
-            hasher.combine(grading)
-        case .PROFESSIONAL(let category):
-            hasher.combine(category)
-        case .NO_IDEA(let category):
-            hasher.combine(category)
-        case .REFUSE(let category):
-            hasher.combine(category)
+            
         }
         hasher.combine(self.regexForCodeModifier())
     }
@@ -283,7 +289,7 @@ enum GeekCodeGrading
 
 
 enum GeekCodeSpecialization : String, CaseIterable {
-   
+    
     case BUSINESS_GEEK
     case GEEK_OF_THE_CLASSICS
     case GEEK_OF_COMMERCIAL_ART
@@ -382,9 +388,9 @@ enum GeekCodeSpecialization : String, CaseIterable {
             return "AT"
         case .WITHOUT:
             return "!"
-
-
-  
+            
+            
+            
         }
     }
 }

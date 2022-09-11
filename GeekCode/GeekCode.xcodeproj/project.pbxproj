@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5657D69328CE7D2D00EBA9B1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657D69228CE7D2D00EBA9B1 /* String.swift */; };
 		56CF5F6D289FBED800040669 /* GeekCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF5F6C289FBED800040669 /* GeekCodeApp.swift */; };
 		56CF5F6F289FBED800040669 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF5F6E289FBED800040669 /* ContentView.swift */; };
 		56CF5F71289FBED900040669 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56CF5F70289FBED900040669 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5657D69228CE7D2D00EBA9B1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		56CF5F69289FBED800040669 /* GeekCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeekCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56CF5F6C289FBED800040669 /* GeekCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeekCodeApp.swift; sourceTree = "<group>"; };
 		56CF5F6E289FBED800040669 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5657D69128CE7D1200EBA9B1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5657D69228CE7D2D00EBA9B1 /* String.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		56CF5F60289FBED800040669 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 		56CF5F7A289FBF6A00040669 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				5657D69128CE7D1200EBA9B1 /* Utils */,
 				56CF5F8128A001B500040669 /* New Group */,
 				56CF5F7B289FBF9000040669 /* GeekCodeCalculator.swift */,
 				56CF5F7D289FBFA300040669 /* GeekCode.swift */,
@@ -225,6 +236,7 @@
 			files = (
 				56CF5F7E289FBFA300040669 /* GeekCode.swift in Sources */,
 				56CF5F6F289FBED800040669 /* ContentView.swift in Sources */,
+				5657D69328CE7D2D00EBA9B1 /* String.swift in Sources */,
 				56CF5F7C289FBF9000040669 /* GeekCodeCalculator.swift in Sources */,
 				56CF5F6D289FBED800040669 /* GeekCodeApp.swift in Sources */,
 			);
