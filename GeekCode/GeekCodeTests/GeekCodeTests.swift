@@ -18,28 +18,28 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(specs!.contains(GeekCodeSpecialization.BUSINESS_GEEK))
         XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
         XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_TECHNICAL_MAGAZINE))
-
-
-
+        
+        
+        
         specs = calculator.specializationsFrom(input: "klajfkldjslkW")
         XCTAssert(specs?.count == 0)
-
-
+        
+        
         specs = calculator.specializationsFrom(input: "GMD/MD/MUAUAUA")
         XCTAssert(specs?.count == 1)
         XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
-
+        
         specs = calculator.specializationsFrom(input: "GMD/AT/MUAUAUA")
         XCTAssert(specs?.count == 2)
         XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
         XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
-
-
+        
+        
         specs = calculator.specializationsFrom(input: "gat/md/MUAUAUA/")
         XCTAssert(specs?.count == 2)
         XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
         XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
-
+        
         
         specs = calculator.specializationsFrom(input: "G!")
         XCTAssert(specs?.count == 1)
@@ -49,60 +49,28 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(specs?.count == 2)
         XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
         XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
-
-        
         
         
     }
     
     
     
-    func testCategoryFrom() throws
+    func testCategoryFromInput() throws
     {
         var category = calculator.categoryFrom(input: "a++")!
+        XCTAssert(category == .Age)
         
-        switch category {
-        case .Age:
-            XCTAssert(true);
-        default:
-            XCTAssert(false);
-        
-        }
-
-
         category = calculator.categoryFrom(input: "d:")!
-        switch category {
-        case .Dimensions:
-            XCTAssert(true);
-        default:
-            XCTAssert(false);
+        XCTAssert(category == .Dimensions);
         
-        }
         category = calculator.categoryFrom(input: "d+:+")!
-        switch category {
-        case .Dimensions:
-            XCTAssert(true);
-        default:
-            XCTAssert(false);
+        XCTAssert(category == .Dimensions);
         
-        }
         category = calculator.categoryFrom(input: "d+:")!
-        switch category {
-        case .Dimensions:
-            XCTAssert(true);
-        default:
-            XCTAssert(false);
+        XCTAssert(category == .Dimensions);
         
-        }
         category = calculator.categoryFrom(input: "d:---")!
-        switch category {
-        case .Dimensions:
-            XCTAssert(true);
-        default:
-            XCTAssert(false);
-        
-        }
-
+        XCTAssert(category == .Dimensions);
     }
     
     

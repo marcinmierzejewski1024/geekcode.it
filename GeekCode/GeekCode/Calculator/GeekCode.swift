@@ -13,8 +13,8 @@ struct GeekCode
 {
     var specs:[GeekCodeSpecialization]?;
     var categories = [GeekCodeCategory]();
-    var categoriesModifiers = [GeekCodeCategory:GeekCodeModifier]();
-    var categoriesGrades = [GeekCodeCategory:GeekCodeGrading]();
+    var categoriesModifiers = [GeekCodeCategory:[GeekCodeModifier]]();
+    var categoriesModifiersGrades = [GeekCodeModifier:GeekCodeGrading]();
 
 
     
@@ -209,14 +209,18 @@ enum GeekCodeCategory : CaseIterable, Hashable
 }
 
 
-enum GeekCodeModifier
+enum GeekCodeModifier : Hashable, CaseIterable
 {
-    case RIGID
-    case CROSS_OVER(GeekCodeGrading?)
-    case WANNABE(GeekCodeGrading?)
-    case PROFESSIONAL
-    case NO_IDEA
-    case REFUSE
+    static var allCases: [GeekCodeModifier] = {
+        return [.RIGID(nil),CROSS_OVER(nil, nil),.WANNABE(nil, nil),.PROFESSIONAL(nil),.NO_IDEA(nil),.REFUSE(nil)]
+    }()
+    
+    case RIGID(GeekCodeCategory?)
+    case CROSS_OVER(GeekCodeCategory?, GeekCodeGrading?)
+    case WANNABE(GeekCodeCategory?, GeekCodeGrading?)
+    case PROFESSIONAL(GeekCodeCategory?)
+    case NO_IDEA(GeekCodeCategory?)
+    case REFUSE(GeekCodeCategory?)
     
     
     func regexForCodeModifier() -> String {
@@ -236,11 +240,32 @@ enum GeekCodeModifier
         }
     }
     
+    func hash(into hasher: inout Hasher) {
+        switch self {
+            
+        case .RIGID(let category):
+            hasher.combine(category)
+        case .CROSS_OVER(let category, let grading):
+            hasher.combine(category)
+            hasher.combine(grading)
+        case .WANNABE(let category, let grading):
+            hasher.combine(category)
+            hasher.combine(grading)
+        case .PROFESSIONAL(let category):
+            hasher.combine(category)
+        case .NO_IDEA(let category):
+            hasher.combine(category)
+        case .REFUSE(let category):
+            hasher.combine(category)
+        }
+        hasher.combine(self.regexForCodeModifier())
+    }
+    
 }
 
 enum GeekCodeGrading
 {
-//    case noGrading??
+    case normal
     case plus
     case plusPlus
     case plusPlusPlus

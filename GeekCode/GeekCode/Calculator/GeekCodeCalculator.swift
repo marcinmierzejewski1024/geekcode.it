@@ -27,6 +27,15 @@ class GeekCodeCalculator
         for nextPart in parts {
             if let foundCategory = self.categoryFrom(input: nextPart) {
                 result.categories.append(foundCategory)
+                
+                let modifiers = self.categoryModifiersFrom(input: nextPart, with: foundCategory)
+
+                result.categoriesModifiers[foundCategory] = modifiers
+
+                for modifier in modifiers {
+                    result.categoriesModifiersGrades[modifier] = self.gradeFrom(input: nextPart, with: modifier)
+                }
+                
             }
         }
         
@@ -39,7 +48,7 @@ class GeekCodeCalculator
     func specializationsFrom(input:String) -> [GeekCodeSpecialization]? {
         var result : [GeekCodeSpecialization];
         var specStrings = Set<String>();
-
+        
         var string = input.uppercased();
         if string.starts(with: "G") {
             string.removeFirst()
@@ -54,14 +63,14 @@ class GeekCodeCalculator
             string.startIndex..<string.endIndex,
             in: string
         )
-
+        
         let matches = captureRegex.matches(
             in: string,
             options: [],
             range: stringRange
         )
         
-
+        
         
         for match in matches {
             for rangeIndex in 0..<match.numberOfRanges {
@@ -85,9 +94,7 @@ class GeekCodeCalculator
     
     
     func categoryFrom(input:String) -> GeekCodeCategory? {
-
-        var result : [GeekCodeSpecialization];
-
+        
         let string = input.uppercased();
         
         let capturePattern = #"(?:[A-Z]+)"#
@@ -99,7 +106,7 @@ class GeekCodeCalculator
             string.startIndex..<string.endIndex,
             in: string
         )
-
+        
         let matches = captureRegex.matches(
             in: string,
             options: [],
@@ -108,7 +115,7 @@ class GeekCodeCalculator
         
         
         
-
+        
         
         for match in matches {
             for rangeIndex in 0..<match.numberOfRanges {
@@ -127,6 +134,24 @@ class GeekCodeCalculator
         
         return nil
     }
+    
+    
+    func categoryModifiersFrom(input: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
+        var result = [GeekCodeModifier]()
+        
+        for potentialCase in GeekCodeModifier.allCases {
+            let caseRegexp = potentialCase.regexForCodeModifier()
+            
+        }
+        
+        return result
+    }
+    
+    func gradeFrom(input:String, with: GeekCodeModifier) -> GeekCodeGrading {
+        
+        return .normal
+    }
+    
     
     func from(gc:GeekCode) -> String {
         
