@@ -149,9 +149,52 @@ class GeekCodeCalculator
     func categoryModifiersFrom(subitem: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
         var result = [GeekCodeModifier]()
         for potentialCase in GeekCodeModifier.allCases {
-            let caseRegexp = potentialCase.regexForCodeModifier()
-            //TODO:compare reqgexp with subitem
+            var caseRegexp = potentialCase.regexForCodeModifier()
+            caseRegexp = String(format: caseRegexp, "[^:()!$>?]+")
+
+            print("caseRegexp",caseRegexp)
+
+            
+            let captureRegex = try! NSRegularExpression(
+                pattern: caseRegexp,
+                options: []
+            )
+            let stringRange = NSRange(
+                subitem.startIndex..<subitem.endIndex,
+                in: subitem
+            )
+            
+            let matches = captureRegex.matches(
+                in: subitem,
+                options: [],
+                range: stringRange
+            )
+            
+            
+            
+            
+            
+            for match in matches {
+                for rangeIndex in 0..<match.numberOfRanges {
+                    let matchRange = match.range(at: rangeIndex)
+                    
+                    // Extract the substring matching the capture group
+                    if let substringRange = Range(matchRange, in: subitem) {
+                        let capture = String(subitem[substringRange])
+                        print("capture",capture)
+                    }
+                }
+            }
+            
         }
+        
+        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
+        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
+        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
+        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
+        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
+        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
+
         
         return result
 

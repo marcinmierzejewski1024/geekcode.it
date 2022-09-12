@@ -228,19 +228,19 @@ enum GeekCodeModifier : Hashable, CaseIterable
     func regexForCodeModifier() -> String {
         switch self {
         case .RIGID:
-            return "@%@"
+            return "%@"
         case .CROSS_OVER:
-            return "(%@)"
+            return "\\(%@\\)"
         case .WANNABE:
-            return ">%@"
+            return "\\>%@"
         case .PROFESSIONAL:
-            return "%@$"
+            return "%@\\$"
         case .DEGREE:
-            return "%@^"
+            return "%@\\^"
         case .NO_IDEA:
-            return "%@?"
+            return "%@\\?"
         case .REFUSE:
-            return "!%@"
+            return "\\!%@"
         }
     }
     
