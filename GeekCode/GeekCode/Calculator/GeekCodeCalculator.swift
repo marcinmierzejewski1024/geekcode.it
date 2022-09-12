@@ -135,30 +135,12 @@ class GeekCodeCalculator
             return nil
         }
         
-        var result = GeekCodeCategoryItem(category: category, part1Modifiers: [])
-        
+        var result = GeekCodeCategoryItem(category: category)
         let parts = input.components(separatedBy: ":")
 
-        
-        var i = 1
         for part in parts {
-            
             let modifiers = self.categoryModifiersFrom(subitem: part, with: category)
-            switch i {
-            case 1:
-                result.part1Modifiers = modifiers
-            case 2:
-                result.part2Modifiers = modifiers
-            case 3:
-                result.part3Modifiers = modifiers
-            case 4:
-                result.part4Modifiers = modifiers
-            case 5:
-                result.part5Modifiers = modifiers
-            default:
-                throw "to many parts!"
-            }
-            i += 1
+            result.modifiers.append(modifiers)
         }
         
         return result

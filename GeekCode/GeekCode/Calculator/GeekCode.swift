@@ -17,13 +17,7 @@ struct GeekCode
 
 struct GeekCodeCategoryItem {
     var category: GeekCodeCategory
-    
-    var part1Modifiers : [GeekCodeModifier]
-    var part2Modifiers : [GeekCodeModifier]?
-    var part3Modifiers : [GeekCodeModifier]?
-    var part4Modifiers : [GeekCodeModifier]?
-    var part5Modifiers : [GeekCodeModifier]?
-
+    var modifiers = [[GeekCodeModifier]]()
     
 }
 

@@ -75,35 +75,35 @@ class GeekCodeTests: XCTestCase {
     func testCategoryItemFrom() throws {
         
         var item = try calculator.categoryItemFrom(input: "a++", with: .Age)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Age, .plusPlus))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Age, .plusPlus))
         
         item = try calculator.categoryItemFrom(input: "d:", with: .Dimensions)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Dimensions, .normal))
-        XCTAssert(item?.part2Modifiers?.first == .RIGID(.Dimensions, .normal))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .normal))
+        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .normal))
         
         item = try calculator.categoryItemFrom(input: "d+:++", with: .Dimensions)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Dimensions, .plus))
-        XCTAssert(item?.part2Modifiers?.first == .RIGID(.Dimensions, .plusPlus))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .plus))
+        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .plusPlus))
 
         item = try calculator.categoryItemFrom(input: "d:---", with: .Dimensions)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Dimensions, .normal))
-        XCTAssert(item?.part2Modifiers?.first == .RIGID(.Dimensions, .minusMinusMinus))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .normal))
+        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .minusMinusMinus))
         
         
         item = try calculator.categoryItemFrom(input: "C++(C-)", with: .Clothing)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Clothing, .plusPlus))
-        XCTAssert(item?.part1Modifiers[1] == .CROSS_OVER(.Clothing, .minus))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Clothing, .plusPlus))
+        XCTAssert(item?.modifiers[0][1] == .CROSS_OVER(.Clothing, .minus))
         
         
 //        (Head : Beard : Brows : Mustache : Sideburns
         item = try calculator.categoryItemFrom(input: "B++:-:+:--(+):+>++", with: .Beard)
-        XCTAssert(item?.part1Modifiers.first == .RIGID(.Beard, .plusPlus))
-        XCTAssert(item?.part2Modifiers?.first == .RIGID(.Beard, .minus))
-        XCTAssert(item?.part3Modifiers?.first == .RIGID(.Beard, .plus))
-        XCTAssert(item?.part4Modifiers?.first == .RIGID(.Beard, .minusMinus))
-        XCTAssert(item?.part4Modifiers![1] == .CROSS_OVER(.Beard, .plus))
-        XCTAssert(item?.part5Modifiers?.first == .RIGID(.Beard, .plus))
-        XCTAssert(item?.part5Modifiers![1] == .WANNABE(.Beard, .plusPlus))
+        XCTAssert(item?.modifiers[0][0] == .RIGID(.Beard, .plusPlus))
+        XCTAssert(item?.modifiers[1][0] == .RIGID(.Beard, .minus))
+        XCTAssert(item?.modifiers[2][0] == .RIGID(.Beard, .plus))
+        XCTAssert(item?.modifiers[3][0] == .RIGID(.Beard, .minusMinus))
+        XCTAssert(item?.modifiers[3][1] == .CROSS_OVER(.Beard, .plus))
+        XCTAssert(item?.modifiers[4][0] == .RIGID(.Beard, .plus))
+        XCTAssert(item?.modifiers[4][1] == .WANNABE(.Beard, .plusPlus))
 
 
     }
