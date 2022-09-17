@@ -171,9 +171,6 @@ class GeekCodeCalculator
             )
             
             
-            
-            
-            
             for match in matches {
                 for rangeIndex in 0..<match.numberOfRanges {
                     let matchRange = match.range(at: rangeIndex)

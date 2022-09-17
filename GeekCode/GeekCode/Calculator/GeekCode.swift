@@ -263,7 +263,7 @@ enum GeekCodeModifier : Hashable, CaseIterable
     
 }
 
-enum GeekCodeGrading
+enum GeekCodeGrading : String, CaseIterable
 {
     case normal
     case plus
@@ -276,6 +276,25 @@ enum GeekCodeGrading
     case minusMinusMinus
     case minusMinusMinusMinus
     case minusMinusMinusMinusMinus
+    
+    
+    static func from(string: String) -> GeekCodeGrading?
+    {
+        let plusCount = string.numberOfOccurrencesOf(string: "+")
+        let minusCount = string.numberOfOccurrencesOf(string: "-")
+
+        for gradeCase in self.allCases {
+            let gradePlus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "plus")
+            let gradeMinus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "minus")
+            
+            if(gradePlus == plusCount && gradeMinus == minusCount) {
+                return gradeCase
+            }
+        }
+        
+        return nil;
+        
+    }
     
 }
 

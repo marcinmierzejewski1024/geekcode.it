@@ -104,8 +104,34 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item?.modifiers[3][1] == .CROSS_OVER(.Beard, .plus))
         XCTAssert(item?.modifiers[4][0] == .RIGID(.Beard, .plus))
         XCTAssert(item?.modifiers[4][1] == .WANNABE(.Beard, .plusPlus))
+        
+        item = try calculator.categoryItemFrom(input: "ul++$", with: .Linux)
+        XCTAssert(item?.modifiers[0][0] == .PROFESSIONAL(.Linux, .plusPlus))
+
+        item = try calculator.categoryItemFrom(input: "!lj", with: .Java)
+        XCTAssert(item?.modifiers[0][0] == .REFUSE(.Java, .normal))
+        
+        item = try calculator.categoryItemFrom(input: "lm?", with: .Matlab)
+        XCTAssert(item?.modifiers[0][0] == .NO_IDEA(.Matlab, .normal))
 
 
+    }
+    
+    
+    func testGradeFromString() throws {
+        
+        var grade = GeekCodeGrading.from(string: "a++--")
+        XCTAssert(grade == nil)
+        
+        grade = GeekCodeGrading.from(string: "a++++")
+        XCTAssert(grade == .plusPlusPlusPlus)
+        
+        grade = GeekCodeGrading.from(string: "a")
+        XCTAssert(grade == .normal)
+        
+        grade = GeekCodeGrading.from(string: "a--")
+        XCTAssert(grade == .minusMinus)
+        
     }
     
 }
