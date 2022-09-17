@@ -17,10 +17,7 @@ struct GeekCode
 
 struct GeekCodeCategoryItem {
     var category: GeekCodeCategory
-    var modifiers = [[GeekCodeModifier]]()
-    
-    
-    
+    var modifiersByParts = [[GeekCodeModifier]]()
 }
 
 enum GeekCodeCategory : CaseIterable, Hashable

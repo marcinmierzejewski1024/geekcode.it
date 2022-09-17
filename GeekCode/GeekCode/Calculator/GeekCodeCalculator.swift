@@ -140,7 +140,7 @@ class GeekCodeCalculator
         
         for part in parts {
             let modifiers = self.categoryModifiersFrom(subitem: part, with: category)
-            result.modifiers.append(modifiers)
+            result.modifiersByParts.append(modifiers)
         }
         
         return result
