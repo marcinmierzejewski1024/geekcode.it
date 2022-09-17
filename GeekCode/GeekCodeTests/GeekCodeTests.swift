@@ -80,7 +80,7 @@ class GeekCodeTests: XCTestCase {
         item = try calculator.categoryItemFrom(input: "d:", with: .Dimensions)
         XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .normal))
         XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .normal))
-        
+//
         item = try calculator.categoryItemFrom(input: "d+:++", with: .Dimensions)
         XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .plus))
         XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .plusPlus))

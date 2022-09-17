@@ -244,6 +244,26 @@ enum GeekCodeModifier : Hashable, CaseIterable
         }
     }
     
+    func withAssociated(category: GeekCodeCategory?, grading: GeekCodeGrading?) -> GeekCodeModifier {
+        switch self {
+        case .RIGID(_, _):
+            return .RIGID(category, grading)
+        case .CROSS_OVER(_, _):
+            return .CROSS_OVER(category, grading)
+        case .WANNABE(_, _):
+            return .WANNABE(category, grading)
+        case .PROFESSIONAL(_, _):
+            return .PROFESSIONAL(category, grading)
+        case .DEGREE(_, _):
+            return .DEGREE(category, grading)
+        case .NO_IDEA(_, _):
+            return .NO_IDEA(category, grading)
+        case .REFUSE(_, _):
+            return .REFUSE(category, grading)
+
+        }
+    }
+    
     func hash(into hasher: inout Hasher) {
         switch self {
             

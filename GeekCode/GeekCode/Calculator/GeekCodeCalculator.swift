@@ -137,7 +137,7 @@ class GeekCodeCalculator
         
         var result = GeekCodeCategoryItem(category: category)
         let parts = input.components(separatedBy: ":")
-
+        
         for part in parts {
             let modifiers = self.categoryModifiersFrom(subitem: part, with: category)
             result.modifiers.append(modifiers)
@@ -148,53 +148,31 @@ class GeekCodeCalculator
     
     func categoryModifiersFrom(subitem: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
         var result = [GeekCodeModifier]()
+        
+        var foundCases = [(GeekCodeModifier, String)]()
         for potentialCase in GeekCodeModifier.allCases {
             var caseRegexp = potentialCase.regexForCodeModifier()
             caseRegexp = String(format: caseRegexp, "[^:()!$>?]+")
-
-            print("caseRegexp",caseRegexp)
-
             
-            let captureRegex = try! NSRegularExpression(
-                pattern: caseRegexp,
-                options: []
-            )
-            let stringRange = NSRange(
-                subitem.startIndex..<subitem.endIndex,
-                in: subitem
-            )
-            
-            let matches = captureRegex.matches(
-                in: subitem,
-                options: [],
-                range: stringRange
-            )
-            
-            
-            for match in matches {
-                for rangeIndex in 0..<match.numberOfRanges {
-                    let matchRange = match.range(at: rangeIndex)
-                    
-                    // Extract the substring matching the capture group
-                    if let substringRange = Range(matchRange, in: subitem) {
-                        let capture = String(subitem[substringRange])
-                        print("capture",capture)
-                    }
+            do {
+                if let occurence = try self.findOccurences(haystack: subitem, regex: caseRegexp).first {
+                    foundCases.append((potentialCase, occurence))
                 }
+            } catch {
+                print(error)
             }
-            
         }
         
-        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
-        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
-        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
-        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
-        result.append(GeekCodeModifier.RIGID(.Beard, .plus))
-        result.append(GeekCodeModifier.RIGID(.Beard, .minus))
-
+        for foundCase in foundCases {
+            let grade = GeekCodeGrading.from(string: foundCase.1)
+            var modifier = foundCase.0
+            modifier = modifier.withAssociated(category: with, grading: grade)
+            result.append(modifier)
+        }
+        
         
         return result
-
+        
     }
     
     
@@ -203,4 +181,43 @@ class GeekCodeCalculator
         
         return "";
     }
+    
+    
+    func findOccurences(haystack: String, regex: String) throws -> [String] {
+        
+        var result = [String]()
+        
+        let captureRegex = try NSRegularExpression(
+            pattern: regex,
+            options: []
+        )
+        let stringRange = NSRange(
+            haystack.startIndex..<haystack.endIndex,
+            in: haystack
+        )
+        
+        let matches = captureRegex.matches(
+            in: haystack,
+            options: [],
+            range: stringRange
+        )
+        
+        
+        for match in matches {
+            for rangeIndex in 0..<match.numberOfRanges {
+                let matchRange = match.range(at: rangeIndex)
+                
+                // Extract the substring matching the capture group
+                if let substringRange = Range(matchRange, in: haystack) {
+                    let capture = String(haystack[substringRange])
+                    print("capture",capture)
+                    result.append(capture)
+                }
+            }
+        }
+        
+        return result
+        
+    }
+    
 }
