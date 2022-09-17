@@ -5,9 +5,9 @@
   Created by Marcin Mierzejewski on 07/08/2022.
   
 */
-"BUSINESS_GEEK" = "Business Geek";
-"GEEK_OF_THE_CLASSICS" = "Geek of the Classics";
-"GEEK_OF_COMMERCIAL_ART" = "Geek of Commercial Art";
+"BusinessGeek" = "Business Geek";
+"GeekOfTheClassics" = "Geek of the Classics";
+"geekOfCommercialArt" = "Geek of Commercial Art";
 "GEEK_OF_COMPUTER_SCIENCE" = "Geek of Computer Science";
 "COMMUNICATIONS_GEEK" = "Communications Geek";
 "GEEK_OF_ENGINEERING" = "Geek of Engineering";

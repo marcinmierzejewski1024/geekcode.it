@@ -38,6 +38,14 @@ enum GeekCodeCategory : CaseIterable, Hashable
     //computers
     case computer
     
+    case windows
+    case windowsXp
+    case windowsVista
+    case windows7
+    case windows8
+    case windows10
+    case windows11
+    
     case unix
     case linux
     case rpm
@@ -62,6 +70,8 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case scoUnix
     case unixNotListed
     
+    case macApple
+    
     //programing
     case java
     case cProgrammingLang
@@ -81,6 +91,103 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case r
     case swift//not added to standard
     case kotlin//not added to standard
+    
+    
+    case inputOutput
+    
+    case pgp
+    
+    //git username Example : G:exarobibliologist Gbn:rutman
+    case gitHub
+    case bitBucket
+    case bitkeeper
+    case beanstalk
+    case subversion
+    case teamFoundationServer
+    
+    case electronics
+    case hardware
+    
+    //politics
+    
+    case politicsGreen
+    case politicsCivilLiberties
+    case politicsGender
+    case politicsEconomic
+    
+    case tv
+//    TBBT        =    The Big Bang Theory
+//    TB5        =    Babylon5
+//    TDW        =    Doctor Who
+//    TEX        =    The Expanse
+//    TFF         =    Firefly
+//    TGT        =    Game of Thrones
+//    THRO        =    Heroes
+//    TI        =    'In search of…' with Leonard Nimoy
+//    TLV        =    Leverage
+//        TLVr    =    Leverage: Redemption
+//    Tmon        =    Monty Python (series/films)
+//    TMM        =    Mad Max
+//    TLOTR        =    Lord of the Rings
+//    TL        =    Lost
+//    TOB        =    Orphan Black
+//    TRM         =    rick&MORTY
+//    TSG        =    Stargate
+//        TSG1    =    Stargate SG-1
+//        TSGa    =    Stargate Atlantis
+//        TSGu    =    Stargate Universe
+//        TSGoc    =    Stargate Origins Catherine
+//    TST        =    Star Trek
+//        TSTanm    =    Star Trek - Animated Series
+//        TSTng    =    Star Trek - The Next Generation
+//        TSTds9    =    Star Trek - Deep Space Nine
+//        TSTv    =    Star Trek - Voyager
+//        TSTe    =    Star Trek - Enterprise
+//        TSTdsc    =    Star Trek - Discovery
+//        TSTpic    =    Star Trek - Picard
+//        TSTld    =    Star Trek - Lower Decks
+//        TSTst    =    Star Trek - Short Treks
+//        TSTpro    =    Star Trek - Prodigy
+//        TSTsnw    =    Star Trek - Strange New Worlds
+//    TSW        =    Star Wars
+//        TSWcw    =    Star Wars Clone Wars
+//        TSWman    =    The Mandalorian
+//        TSWand    =    Star Wars - Andor
+//        TSWobi    =    Star Wars - Obi-Wan Kenobi
+//        TSWbob    =    Star Wars - Book of Boba Fett
+//        TSWv    =    Star Wars - Visions
+//        TSWbb    =    Star Wars - The Bad Batch
+//        TSWres    =    Star Wars - Resistance
+//        TSWreb    =    Star Wars - Rebels
+//    TW13    =    Warehouse 13
+    
+    
+    case rpg
+    
+    case books
+    
+    case comics
+    case comicsDilbert
+    case comicsXKCD
+    case comicsManga
+    case comicsHentai
+    
+    case residence
+    
+    
+    //sex
+    case sheHer
+    case heHim
+    case theyThem
+    case zeHir
+    case zeZir
+    case xeXem
+    case verVir
+    case perPer
+    case eyEm
+    case faeFaer
+    case aeAer
+    case ellesElles
     
     
     static func from(key:String) -> GeekCodeCategory?
@@ -201,6 +308,93 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "lsw"
         case .kotlin:
             return "lko"
+        case .windows:
+            return "mw"
+        case .windowsXp:
+            return "mwxp"
+        case .windowsVista:
+            return "mwV"
+        case .windows7:
+            return "mw7"
+        case .windows8:
+            return "mw8"
+        case .windows10:
+            return "mw10"
+        case .windows11:
+            return "mw11"
+        case .electronics:
+            return "e"
+        case .macApple:
+            return "mc"
+        case .inputOutput:
+            return "io"
+        case .pgp:
+            return "pgp"
+        case .gitHub:
+            return "g"
+        case .bitBucket:
+            return "gb"
+        case .bitkeeper:
+            return "gbk"
+        case .beanstalk:
+            return "gbn"
+        case .subversion:
+            return "gsvn"
+        case .teamFoundationServer:
+            return "gtfs"
+        case .hardware:
+            return "h"
+        case .politicsGreen:
+            return "psg"
+        case .politicsCivilLiberties:
+            return "psl"
+        case .politicsGender:
+            return  "pss"
+        case .politicsEconomic:
+            return "pe"
+        case .tv:
+            return "t"
+        case .rpg:
+            return "rpg"
+        case .books:
+            return "bk"
+        case .comics:
+            return "k"
+        case .comicsDilbert:
+            return "kd"
+        case .comicsXKCD:
+            return "kx"
+        case .comicsManga:
+            return "km"
+        case .comicsHentai:
+            return "km!"//not sure about if it should be a separate spec
+        case .residence:
+            return "r"
+        case .sheHer:
+            return "she/her"
+        case .heHim:
+            return "he/him"
+        case .theyThem:
+            return "they/them"
+        case .zeHir:
+            return "ze/hir"
+        case .zeZir:
+            return "ze/zir"
+        case .xeXem:
+            return "xe/xem"
+        case .verVir:
+            return "ver/vir"
+        case .perPer:
+            return "per/per"
+        case .eyEm:
+            return "ey/em"
+        case .faeFaer:
+            return "fae/faer"
+        case .aeAer:
+            return "ae/aer"
+        case .ellesElles:
+            return "elles/elles"
+
         }
         
     }
@@ -304,18 +498,25 @@ enum GeekCodeGrading : String, CaseIterable
     case minusMinusMinus
     case minusMinusMinusMinus
     case minusMinusMinusMinusMinus
+    case weird
+    case weirdWeird
+    case weirdWeirdWeird
+    case weirdWeirdWeirdWeird
     
     
     static func from(string: String) -> GeekCodeGrading?
     {
         let plusCount = string.numberOfOccurrencesOf(string: "+")
         let minusCount = string.numberOfOccurrencesOf(string: "-")
+        let asteriksCount = string.numberOfOccurrencesOf(string: "*")
         
         for gradeCase in self.allCases {
             let gradePlus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "plus")
             let gradeMinus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "minus")
+            let gradeWeird = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "weird")
+
             
-            if(gradePlus == plusCount && gradeMinus == minusCount) {
+            if(gradePlus == plusCount && gradeMinus == minusCount && gradeWeird == asteriksCount) {
                 return gradeCase
             }
         }

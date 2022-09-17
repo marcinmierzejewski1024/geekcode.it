@@ -158,6 +158,12 @@ class GeekCodeTests: XCTestCase {
         grade = GeekCodeGrading.from(string: "a--")
         XCTAssert(grade == .minusMinus)
         
+        grade = GeekCodeGrading.from(string: "he/they++")
+        XCTAssert(grade == .plusPlus)
+        
+        grade = GeekCodeGrading.from(string: "she/her**")
+        XCTAssert(grade == .weirdWeird)
+        
     }
     
 }
