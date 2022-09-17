@@ -23,71 +23,71 @@ struct GeekCodeCategoryItem {
 enum GeekCodeCategory : CaseIterable, Hashable
 {
     
-    //Appearance
-    case Age
-    case Beard
-    case BeardMustache
-    case BeardSideburns
-    case BeardBushyEyebrows
-    case Clothing
-    case ClothingCrossDresser
-    case ClothingDontCare
-    case Dimensions
+    //appearance
+    case age
+    case beard
+    case beardMustache
+    case beardSideburns
+    case beardBushyEyebrows
+    case clothing
+    case clothingCrossdresser
+    case clothingDontCare
+    case dimensions
     
     
-    //Computers
-    case Computer
+    //computers
+    case computer
     
-    case Unix
-    case Linux
-    case RPM
-    case Cwntos
-    case Fedora
-    case Opensuse
-    case Urpmi
-    case Apt_rpm
-    case Debian
-    case Ubuntu
-    case Thirdparty
-    case Mepis
-    case Knoppix
-    case Pacman
-    case Gentoo
-    case Slackware
-    case Other
-    case SunOS_Solaris
-    case AIX
-    case HPUX
-    case IRIX
-    case SCO_Unix
-    case UnixNot_listed
+    case unix
+    case linux
+    case rpm
+    case cwntos
+    case fedora
+    case opensuse
+    case urpmi
+    case aptRpm
+    case debian
+    case ubuntu
+    case thirdparty
+    case mepis
+    case knoppix
+    case pacman
+    case gentoo
+    case slackware
+    case other
+    case sunosSolaris
+    case aix
+    case hpux
+    case irix
+    case scoUnix
+    case unixNotListed
     
     //programing
-    case Java
-    case Cprogramminglang
-    case Cplusplus
-    case Csharp
-    case Visualbasic
-    case Python
-    case Javascript
-    case Php
-    case Objectivec
-    case Sql
-    case Perl
-    case Ruby
-    case Matlab
-    case Assembly
-    case Go
-    case R
-    case Swift//not added to standard
-    case Kotlin//not added to standard
+    case java
+    case cProgrammingLang
+    case cplusplus
+    case csharp
+    case visualbasic
+    case python
+    case javascript
+    case php
+    case objectivec
+    case sql
+    case perl
+    case ruby
+    case matlab
+    case assembly
+    case go
+    case r
+    case swift//not added to standard
+    case kotlin//not added to standard
     
     
     static func from(key:String) -> GeekCodeCategory?
     {
-        for catCase in self.allCases {
-            if key.lowercased() == catCase.key().lowercased() {
-                return catCase
+        for catcase in self.allCases {
+            if key.lowercased() == catcase.key().lowercased() {
+                return catcase
             }
         }
         
@@ -99,107 +99,107 @@ enum GeekCodeCategory : CaseIterable, Hashable
         
         switch self {
             
-        case .Age:
+        case .age:
             return "a"
-        case .Beard:
+        case .beard:
             return "b"
-        case .BeardMustache:
+        case .beardMustache:
             return "bm"
-        case .BeardSideburns:
+        case .beardSideburns:
             return "bs"
-        case .BeardBushyEyebrows:
+        case .beardBushyEyebrows:
             return "bb"
-        case .Clothing:
+        case .clothing:
             return "c"
-        case .ClothingCrossDresser:
+        case .clothingCrossdresser:
             return "cx"
-        case .ClothingDontCare:
+        case .clothingDontCare:
             return "cpu"
-        case .Dimensions:
+        case .dimensions:
             return "d"
-        case .Computer:
+        case .computer:
             return "c"
-        case .Unix:
+        case .unix:
             return "u"
-        case .Linux:
+        case .linux:
             return "ul"
-        case .RPM:
+        case .rpm:
             return "ulr"
-        case .Cwntos:
+        case .cwntos:
             return "ulrc"
-        case .Fedora:
+        case .fedora:
             return "ulrf"
-        case .Opensuse:
+        case .opensuse:
             return "ulro"
-        case .Urpmi:
+        case .urpmi:
             return "ulru"
-        case .Apt_rpm:
+        case .aptRpm:
             return "ulra"
-        case .Debian:
+        case .debian:
             return "uld"
-        case .Ubuntu:
+        case .ubuntu:
             return "uldu"
-        case .Thirdparty:
+        case .thirdparty:
             return "uldux"
-        case .Mepis:
+        case .mepis:
             return "uldm"
-        case .Knoppix:
+        case .knoppix:
             return "uldk"
-        case .Pacman:
+        case .pacman:
             return "ulp"
-        case .Gentoo:
+        case .gentoo:
             return "ulg"
-        case .Slackware:
+        case .slackware:
             return "uls"
-        case .Other:
+        case .other:
             return "ul*"
-        case .SunOS_Solaris:
+        case .sunosSolaris:
             return "us"
-        case .AIX:
+        case .aix:
             return "ua"
-        case .HPUX:
+        case .hpux:
             return "uh"
-        case .IRIX:
+        case .irix:
             return "ui"
-        case .SCO_Unix:
+        case .scoUnix:
             return "uc"
-        case .UnixNot_listed:
+        case .unixNotListed:
             return "u*"
-        case .Java:
+        case .java:
             return "lj"
-        case .Cprogramminglang:
+        case .cProgrammingLang:
             return "lc"
-        case .Cplusplus:
+        case .cplusplus:
             return "lcpp"
-        case .Csharp:
+        case .csharp:
             return "lc#"
-        case .Visualbasic:
+        case .visualbasic:
             return "lvb"
-        case .Python:
+        case .python:
             return "lp"
-        case .Javascript:
+        case .javascript:
             return "ljs"
-        case .Php:
+        case .php:
             return "lphp"
-        case .Objectivec:
+        case .objectivec:
             return "loc"
-        case .Sql:
+        case .sql:
             return "lsql"
-        case .Perl:
+        case .perl:
             return "lp"
-        case .Ruby:
+        case .ruby:
             return "lru"
-        case .Matlab:
+        case .matlab:
             return "lm"
-        case .Assembly:
+        case .assembly:
             return "lasm"
-        case .Go:
+        case .go:
             return "lgo"
-        case .R:
+        case .r:
             return "lr"
-        case .Swift:
+        case .swift:
             return "lsw"
-        case .Kotlin:
+        case .kotlin:
             return "lko"
         }
         
@@ -212,30 +212,30 @@ enum GeekCodeCategory : CaseIterable, Hashable
 enum GeekCodeModifier : Hashable
 {
     
-    case RIGID(GeekCodeCategory?, GeekCodeGrading?)
-    case CROSS_OVER(GeekCodeCategory?, GeekCodeGrading?)
-    case WANNABE(GeekCodeCategory?, GeekCodeGrading?)
-    case PROFESSIONAL(GeekCodeCategory?, GeekCodeGrading?)
-    case DEGREE(GeekCodeCategory?, GeekCodeGrading?)
-    case NO_IDEA(GeekCodeCategory?, GeekCodeGrading?)
-    case REFUSE(GeekCodeCategory?, GeekCodeGrading?)
+    case rigid(GeekCodeCategory?, GeekCodeGrading?)
+    case crossOver(GeekCodeCategory?, GeekCodeGrading?)
+    case wannabe(GeekCodeCategory?, GeekCodeGrading?)
+    case professional(GeekCodeCategory?, GeekCodeGrading?)
+    case degree(GeekCodeCategory?, GeekCodeGrading?)
+    case noIdea(GeekCodeCategory?, GeekCodeGrading?)
+    case refuse(GeekCodeCategory?, GeekCodeGrading?)
     
     
     func regexForCodeModifier() -> String {
         switch self {
-        case .RIGID:
+        case .rigid:
             return "%@"
-        case .CROSS_OVER:
+        case .crossOver:
             return "\\(%@\\)"
-        case .WANNABE:
+        case .wannabe:
             return "\\>%@"
-        case .PROFESSIONAL:
+        case .professional:
             return "%@\\$"
-        case .DEGREE:
+        case .degree:
             return "%@\\^"
-        case .NO_IDEA:
+        case .noIdea:
             return "%@\\?"
-        case .REFUSE:
+        case .refuse:
             return "\\!%@"
         }
     }
@@ -243,31 +243,31 @@ enum GeekCodeModifier : Hashable
     //cases in order with they have to be searched
     static var emptyCasesInSearchOrder: [GeekCodeModifier] = {
         return [
-            .PROFESSIONAL(nil,nil),
-            .DEGREE(nil,nil),
-            .NO_IDEA(nil,nil),
-            .REFUSE(nil,nil),
-            .CROSS_OVER(nil, nil),
-            .WANNABE(nil, nil),
-            .RIGID(nil,nil)]
+            .professional(nil,nil),
+            .degree(nil,nil),
+            .noIdea(nil,nil),
+            .refuse(nil,nil),
+            .crossOver(nil, nil),
+            .wannabe(nil, nil),
+            .rigid(nil,nil)]
     }()
     
     func withAssociated(category: GeekCodeCategory?, grading: GeekCodeGrading?) -> GeekCodeModifier {
         switch self {
-        case .RIGID(_, _):
-            return .RIGID(category, grading)
-        case .CROSS_OVER(_, _):
-            return .CROSS_OVER(category, grading)
-        case .WANNABE(_, _):
-            return .WANNABE(category, grading)
-        case .PROFESSIONAL(_, _):
-            return .PROFESSIONAL(category, grading)
-        case .DEGREE(_, _):
-            return .DEGREE(category, grading)
-        case .NO_IDEA(_, _):
-            return .NO_IDEA(category, grading)
-        case .REFUSE(_, _):
-            return .REFUSE(category, grading)
+        case .rigid(_, _):
+            return .rigid(category, grading)
+        case .crossOver(_, _):
+            return .crossOver(category, grading)
+        case .wannabe(_, _):
+            return .wannabe(category, grading)
+        case .professional(_, _):
+            return .professional(category, grading)
+        case .degree(_, _):
+            return .degree(category, grading)
+        case .noIdea(_, _):
+            return .noIdea(category, grading)
+        case .refuse(_, _):
+            return .refuse(category, grading)
             
         }
     }
@@ -275,13 +275,13 @@ enum GeekCodeModifier : Hashable
     func hash(into hasher: inout Hasher) {
         switch self {
             
-        case .RIGID(let category, let grading)
-            ,.CROSS_OVER(let category, let grading)
-            ,.WANNABE(let category, let grading)
-            ,.PROFESSIONAL(let category, let grading)
-            ,.DEGREE(let category, let grading)
-            ,.NO_IDEA(let category, let grading)
-            ,.REFUSE(let category, let grading):
+        case .rigid(let category, let grading)
+            ,.crossOver(let category, let grading)
+            ,.wannabe(let category, let grading)
+            ,.professional(let category, let grading)
+            ,.degree(let category, let grading)
+            ,.noIdea(let category, let grading)
+            ,.refuse(let category, let grading):
             hasher.combine(category)
             hasher.combine(grading)
             

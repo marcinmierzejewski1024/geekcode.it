@@ -155,15 +155,15 @@ class GeekCodeCalculator
             caseRegexp = String(format: caseRegexp, "[^:()!$>?]+")
             
             do {
-                if (potentialCase == .RIGID(nil, nil)) {
+                if (potentialCase == .rigid(nil, nil)) {
                     
                     //exception to ignore ridgid match if there is already refuse,degree,no idea or professional
                     let alreadyHandled = foundCases.contains { (modifier, _) in
                         switch modifier {
-                        case .PROFESSIONAL(_, _),
-                        .DEGREE(_, _),
-                        .NO_IDEA(_, _),
-                        .REFUSE(_, _):
+                        case .professional(_, _),
+                        .degree(_, _),
+                        .noIdea(_, _),
+                        .refuse(_, _):
                             return true
                         default:
                             return false
