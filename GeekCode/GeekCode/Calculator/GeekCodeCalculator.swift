@@ -150,12 +150,38 @@ class GeekCodeCalculator
         var result = [GeekCodeModifier]()
         
         var foundCases = [(GeekCodeModifier, String)]()
-        for potentialCase in GeekCodeModifier.allCases {
+        for potentialCase in GeekCodeModifier.emptyCasesInSearchOrder {
             var caseRegexp = potentialCase.regexForCodeModifier()
             caseRegexp = String(format: caseRegexp, "[^:()!$>?]+")
             
             do {
+                if (potentialCase == .RIGID(nil, nil)) {
+                    
+                    //exception to ignore ridgid match if there is already refuse,degree,no idea or professional
+                    let alreadyHandled = foundCases.contains { (modifier, _) in
+                        switch modifier {
+                        case .PROFESSIONAL(_, _),
+                        .DEGREE(_, _),
+                        .NO_IDEA(_, _),
+                        .REFUSE(_, _):
+                            return true
+                        default:
+                            return false
+                        }
+                    }
+                    if alreadyHandled {
+                        continue
+                    }
+                    
+                    //exception to handle empty subitem as rigid with no grading
+                    if (subitem == "") {
+                        foundCases.append((potentialCase, ""))
+                    }
+                }
+                
+                
                 if let occurence = try self.findOccurences(haystack: subitem, regex: caseRegexp).first {
+                    print("found potential \(potentialCase)")
                     foundCases.append((potentialCase, occurence))
                 }
             } catch {

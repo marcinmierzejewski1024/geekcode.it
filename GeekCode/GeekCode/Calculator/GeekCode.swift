@@ -19,6 +19,8 @@ struct GeekCodeCategoryItem {
     var category: GeekCodeCategory
     var modifiers = [[GeekCodeModifier]]()
     
+    
+    
 }
 
 enum GeekCodeCategory : CaseIterable, Hashable
@@ -210,11 +212,8 @@ enum GeekCodeCategory : CaseIterable, Hashable
 }
 
 
-enum GeekCodeModifier : Hashable, CaseIterable
+enum GeekCodeModifier : Hashable
 {
-    static var allCases: [GeekCodeModifier] = {
-        return [.RIGID(nil,nil),CROSS_OVER(nil, nil),.WANNABE(nil, nil),.PROFESSIONAL(nil,nil),.NO_IDEA(nil,nil),.REFUSE(nil,nil)]
-    }()
     
     case RIGID(GeekCodeCategory?, GeekCodeGrading?)
     case CROSS_OVER(GeekCodeCategory?, GeekCodeGrading?)
@@ -244,6 +243,18 @@ enum GeekCodeModifier : Hashable, CaseIterable
         }
     }
     
+    //cases in order with they have to be searched
+    static var emptyCasesInSearchOrder: [GeekCodeModifier] = {
+        return [
+            .PROFESSIONAL(nil,nil),
+            .DEGREE(nil,nil),
+            .NO_IDEA(nil,nil),
+            .REFUSE(nil,nil),
+            .CROSS_OVER(nil, nil),
+            .WANNABE(nil, nil),
+            .RIGID(nil,nil)]
+    }()
+    
     func withAssociated(category: GeekCodeCategory?, grading: GeekCodeGrading?) -> GeekCodeModifier {
         switch self {
         case .RIGID(_, _):
@@ -260,7 +271,7 @@ enum GeekCodeModifier : Hashable, CaseIterable
             return .NO_IDEA(category, grading)
         case .REFUSE(_, _):
             return .REFUSE(category, grading)
-
+            
         }
     }
     
@@ -302,7 +313,7 @@ enum GeekCodeGrading : String, CaseIterable
     {
         let plusCount = string.numberOfOccurrencesOf(string: "+")
         let minusCount = string.numberOfOccurrencesOf(string: "-")
-
+        
         for gradeCase in self.allCases {
             let gradePlus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "plus")
             let gradeMinus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "minus")

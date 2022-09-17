@@ -75,44 +75,70 @@ class GeekCodeTests: XCTestCase {
     func testCategoryItemFrom() throws {
         
         var item = try calculator.categoryItemFrom(input: "a++", with: .Age)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Age, .plusPlus))
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Age, .plusPlus)))
+        XCTAssert(item!.modifiers.count == 1)
+        XCTAssert(item!.modifiers[0].count == 1)
+
         
         item = try calculator.categoryItemFrom(input: "d:", with: .Dimensions)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .normal))
-        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .normal))
-//
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Dimensions, .normal)))
+        XCTAssert(item!.modifiers[1].contains(.RIGID(.Dimensions, .normal)))
+        XCTAssert(item!.modifiers.count == 2)
+
+
         item = try calculator.categoryItemFrom(input: "d+:++", with: .Dimensions)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .plus))
-        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .plusPlus))
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Dimensions, .plus)))
+        XCTAssert(item!.modifiers[1].contains(.RIGID(.Dimensions, .plusPlus)))
+        XCTAssert(item!.modifiers.count == 2)
+
 
         item = try calculator.categoryItemFrom(input: "d:---", with: .Dimensions)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Dimensions, .normal))
-        XCTAssert(item?.modifiers[1][0] == .RIGID(.Dimensions, .minusMinusMinus))
-        
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Dimensions, .normal)))
+        XCTAssert(item!.modifiers[1].contains(.RIGID(.Dimensions, .minusMinusMinus)))
+        XCTAssert(item!.modifiers.count == 2)
+
         
         item = try calculator.categoryItemFrom(input: "C++(C-)", with: .Clothing)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Clothing, .plusPlus))
-        XCTAssert(item?.modifiers[0][1] == .CROSS_OVER(.Clothing, .minus))
-        
-        
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Clothing, .plusPlus)))
+        XCTAssert(item!.modifiers[0].contains(.CROSS_OVER(.Clothing, .minus)))
+        XCTAssert(item!.modifiers.count == 1)
+
+
 //        (Head : Beard : Brows : Mustache : Sideburns
         item = try calculator.categoryItemFrom(input: "B++:-:+:--(+):+>++", with: .Beard)
-        XCTAssert(item?.modifiers[0][0] == .RIGID(.Beard, .plusPlus))
-        XCTAssert(item?.modifiers[1][0] == .RIGID(.Beard, .minus))
-        XCTAssert(item?.modifiers[2][0] == .RIGID(.Beard, .plus))
-        XCTAssert(item?.modifiers[3][0] == .RIGID(.Beard, .minusMinus))
-        XCTAssert(item?.modifiers[3][1] == .CROSS_OVER(.Beard, .plus))
-        XCTAssert(item?.modifiers[4][0] == .RIGID(.Beard, .plus))
-        XCTAssert(item?.modifiers[4][1] == .WANNABE(.Beard, .plusPlus))
+        XCTAssert(item!.modifiers[0].contains(.RIGID(.Beard, .plusPlus)))
+        XCTAssert(item!.modifiers[1].contains(.RIGID(.Beard, .minus)))
+        XCTAssert(item!.modifiers[2].contains(.RIGID(.Beard, .plus)))
+        XCTAssert(item!.modifiers[3].contains(.RIGID(.Beard, .minusMinus)))
+        XCTAssert(item!.modifiers[3].contains(.CROSS_OVER(.Beard, .plus)))
+        XCTAssert(item!.modifiers[4].contains(.RIGID(.Beard, .plus)))
+        XCTAssert(item!.modifiers[4].contains(.WANNABE(.Beard, .plusPlus)))
+        XCTAssert(item!.modifiers.count == 5)
         
         item = try calculator.categoryItemFrom(input: "ul++$", with: .Linux)
-        XCTAssert(item?.modifiers[0][0] == .PROFESSIONAL(.Linux, .plusPlus))
+        XCTAssert(item!.modifiers[0].contains(.PROFESSIONAL(.Linux, .plusPlus)))
+        XCTAssert(item!.modifiers.count == 1)
+        XCTAssert(item!.modifiers[0].count == 1)
 
+                                  
         item = try calculator.categoryItemFrom(input: "!lj", with: .Java)
-        XCTAssert(item?.modifiers[0][0] == .REFUSE(.Java, .normal))
+        XCTAssert(item!.modifiers[0].contains(.REFUSE(.Java, .normal)))
+        XCTAssert(item!.modifiers.count == 1)
+        XCTAssert(item!.modifiers[0].count == 1)
+
         
         item = try calculator.categoryItemFrom(input: "lm?", with: .Matlab)
-        XCTAssert(item?.modifiers[0][0] == .NO_IDEA(.Matlab, .normal))
+        XCTAssert(item!.modifiers[0].contains(.NO_IDEA(.Matlab, .normal)))
+        XCTAssert(item!.modifiers.count == 1)
+        XCTAssert(item!.modifiers[0].count == 1)
+
+
+        item = try calculator.categoryItemFrom(input: "lm--^", with: .Matlab)
+        XCTAssert(item!.modifiers[0].contains(.DEGREE(.Matlab, .minusMinus)))
+        XCTAssert(item!.modifiers.count == 1)
+        XCTAssert(item!.modifiers[0].count == 1)
+
+
 
 
     }
