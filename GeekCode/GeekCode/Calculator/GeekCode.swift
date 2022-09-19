@@ -116,50 +116,50 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case politicsEconomic
     
     case tv
-//    TBBT        =    The Big Bang Theory
-//    TB5        =    Babylon5
-//    TDW        =    Doctor Who
-//    TEX        =    The Expanse
-//    TFF         =    Firefly
-//    TGT        =    Game of Thrones
-//    THRO        =    Heroes
-//    TI        =    'In search of…' with Leonard Nimoy
-//    TLV        =    Leverage
-//        TLVr    =    Leverage: Redemption
-//    Tmon        =    Monty Python (series/films)
-//    TMM        =    Mad Max
-//    TLOTR        =    Lord of the Rings
-//    TL        =    Lost
-//    TOB        =    Orphan Black
-//    TRM         =    rick&MORTY
-//    TSG        =    Stargate
-//        TSG1    =    Stargate SG-1
-//        TSGa    =    Stargate Atlantis
-//        TSGu    =    Stargate Universe
-//        TSGoc    =    Stargate Origins Catherine
-//    TST        =    Star Trek
-//        TSTanm    =    Star Trek - Animated Series
-//        TSTng    =    Star Trek - The Next Generation
-//        TSTds9    =    Star Trek - Deep Space Nine
-//        TSTv    =    Star Trek - Voyager
-//        TSTe    =    Star Trek - Enterprise
-//        TSTdsc    =    Star Trek - Discovery
-//        TSTpic    =    Star Trek - Picard
-//        TSTld    =    Star Trek - Lower Decks
-//        TSTst    =    Star Trek - Short Treks
-//        TSTpro    =    Star Trek - Prodigy
-//        TSTsnw    =    Star Trek - Strange New Worlds
-//    TSW        =    Star Wars
-//        TSWcw    =    Star Wars Clone Wars
-//        TSWman    =    The Mandalorian
-//        TSWand    =    Star Wars - Andor
-//        TSWobi    =    Star Wars - Obi-Wan Kenobi
-//        TSWbob    =    Star Wars - Book of Boba Fett
-//        TSWv    =    Star Wars - Visions
-//        TSWbb    =    Star Wars - The Bad Batch
-//        TSWres    =    Star Wars - Resistance
-//        TSWreb    =    Star Wars - Rebels
-//    TW13    =    Warehouse 13
+    //    TBBT        =    The Big Bang Theory
+    //    TB5        =    Babylon5
+    //    TDW        =    Doctor Who
+    //    TEX        =    The Expanse
+    //    TFF         =    Firefly
+    //    TGT        =    Game of Thrones
+    //    THRO        =    Heroes
+    //    TI        =    'In search of…' with Leonard Nimoy
+    //    TLV        =    Leverage
+    //        TLVr    =    Leverage: Redemption
+    //    Tmon        =    Monty Python (series/films)
+    //    TMM        =    Mad Max
+    //    TLOTR        =    Lord of the Rings
+    //    TL        =    Lost
+    //    TOB        =    Orphan Black
+    //    TRM         =    rick&MORTY
+    //    TSG        =    Stargate
+    //        TSG1    =    Stargate SG-1
+    //        TSGa    =    Stargate Atlantis
+    //        TSGu    =    Stargate Universe
+    //        TSGoc    =    Stargate Origins Catherine
+    //    TST        =    Star Trek
+    //        TSTanm    =    Star Trek - Animated Series
+    //        TSTng    =    Star Trek - The Next Generation
+    //        TSTds9    =    Star Trek - Deep Space Nine
+    //        TSTv    =    Star Trek - Voyager
+    //        TSTe    =    Star Trek - Enterprise
+    //        TSTdsc    =    Star Trek - Discovery
+    //        TSTpic    =    Star Trek - Picard
+    //        TSTld    =    Star Trek - Lower Decks
+    //        TSTst    =    Star Trek - Short Treks
+    //        TSTpro    =    Star Trek - Prodigy
+    //        TSTsnw    =    Star Trek - Strange New Worlds
+    //    TSW        =    Star Wars
+    //        TSWcw    =    Star Wars Clone Wars
+    //        TSWman    =    The Mandalorian
+    //        TSWand    =    Star Wars - Andor
+    //        TSWobi    =    Star Wars - Obi-Wan Kenobi
+    //        TSWbob    =    Star Wars - Book of Boba Fett
+    //        TSWv    =    Star Wars - Visions
+    //        TSWbb    =    Star Wars - The Bad Batch
+    //        TSWres    =    Star Wars - Resistance
+    //        TSWreb    =    Star Wars - Rebels
+    //    TW13    =    Warehouse 13
     
     
     case rpg
@@ -394,9 +394,31 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "ae/aer"
         case .ellesElles:
             return "elles/elles"
-
+            
         }
         
+    }
+    
+    func extraSectionsNames() -> [String]? {
+        switch self {
+        case .gitHub
+            ,.bitBucket
+            ,.bitkeeper
+            ,.beanstalk
+            ,.subversion
+            ,.teamFoundationServer:
+            return ["","username"]
+        case .dimensions:
+            return ["height","weight"]
+        case .beard:
+            return ["head","beard","brows","mustache","sideburns"]
+        case .inputOutput:
+            return ["input","output"]
+
+        default:
+            return nil
+            
+        }
     }
     
     
@@ -514,7 +536,7 @@ enum GeekCodeGrading : String, CaseIterable
             let gradePlus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "plus")
             let gradeMinus = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "minus")
             let gradeWeird = gradeCase.rawValue.lowercased().numberOfOccurrencesOf(string: "weird")
-
+            
             
             if(gradePlus == plusCount && gradeMinus == minusCount && gradeWeird == asteriksCount) {
                 return gradeCase
