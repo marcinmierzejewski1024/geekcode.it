@@ -397,7 +397,7 @@ enum GeekCodeCategory : CaseIterable, Hashable
         
     }
     
-    func extraSectionsNames() -> [String]? {
+    func partsNames() -> [String]? {
         switch self {
         case .gitHub
             ,.bitBucket
