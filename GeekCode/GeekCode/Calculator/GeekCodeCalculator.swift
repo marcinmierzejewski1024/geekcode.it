@@ -7,14 +7,21 @@
 
 import Foundation
 
+enum GeekcodingException: Error {
+    case unrecognizedToken(String)
+    case otherError(Error)
+}
+
+
 class GeekCodeCalculator
 {
     func from(string:String) throws -> GeekCode? {
         
         var result = GeekCode();
-        let replaced = string.replacingOccurrences(of: "_", with: " ")
-        var parts = replaced.components(separatedBy: .whitespaces)
-        
+        let replaced = string.replacingOccurrences(of: "_", with: "")
+        let condensed = replaced.condensed.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        var parts = condensed.components(separatedBy: .whitespaces)
         
         if let firstPart = parts.first {
             if let firstPartResult = self.specializationsFrom(input: firstPart) {
@@ -24,17 +31,19 @@ class GeekCodeCalculator
         }
         
         for nextPart in parts {
-            if let foundCategory = self.categoryFrom(input: nextPart) {
-                if let categoryItem = try self.categoryItemFrom(input: nextPart, with: foundCategory) {
+            do {
+                if let categoryItem = try self.categoryItemFrom(input: nextPart) {
                     result.categories.append(categoryItem)
                 }
-                
+            } catch GeekcodingException.unrecognizedToken(let token) {
+                result.notRecognizedTokens.append(token)
             }
+            
         }
         
         
         
-        return nil;
+        return result;
         
     }
     
@@ -78,7 +87,17 @@ class GeekCodeCalculator
         }
         
         result = specStrings.compactMap({ candidate in
-            return GeekCodeSpecialization.from(key: candidate)
+            if let result = GeekCodeSpecialization.from(key: candidate) {
+                return result
+            } else {
+                if candidate.starts(with: "G") {
+                    var notFoundCandidate = candidate
+                    notFoundCandidate.removeFirst()
+                    return GeekCodeSpecialization.from(key: notFoundCandidate)
+
+                }
+                return nil
+            }
         })
         
         
@@ -124,14 +143,16 @@ class GeekCodeCalculator
         }
         
         
-        
         return nil
     }
     
     
-    func categoryItemFrom(input: String, with: GeekCodeCategory) throws -> GeekCodeCategoryItem? {
+    func categoryItemFrom(input: String) throws -> GeekCodeCategoryItem? {
         
         guard let category = self.categoryFrom(input: input) else {
+            if(!input.isEmpty) {
+                throw GeekcodingException.unrecognizedToken(input)
+            }
             return nil
         }
         
@@ -139,14 +160,14 @@ class GeekCodeCalculator
         let parts = input.components(separatedBy: ":")
         
         for part in parts {
-            let modifiers = self.categoryModifiersFrom(subitem: part, with: category)
+            let modifiers = try self.categoryModifiersFrom(subitem: part, with: category)
             result.modifiersByParts.append(modifiers)
         }
         
         return result
     }
     
-    func categoryModifiersFrom(subitem: String, with: GeekCodeCategory) -> [GeekCodeModifier] {
+    func categoryModifiersFrom(subitem: String, with: GeekCodeCategory) throws -> [GeekCodeModifier] {
         var result = [GeekCodeModifier]()
         
         var foundCases = [(GeekCodeModifier, String)]()
@@ -161,9 +182,9 @@ class GeekCodeCalculator
                     let alreadyHandled = foundCases.contains { (modifier, _) in
                         switch modifier {
                         case .professional(_, _),
-                        .degree(_, _),
-                        .noIdea(_, _),
-                        .refuse(_, _):
+                                .degree(_, _),
+                                .noIdea(_, _),
+                                .refuse(_, _):
                             return true
                         default:
                             return false
@@ -184,8 +205,11 @@ class GeekCodeCalculator
                     print("found potential \(potentialCase)")
                     foundCases.append((potentialCase, occurence))
                 }
+                
+                
+                
             } catch {
-                print(error)
+                throw GeekcodingException.otherError(error)
             }
         }
         
@@ -194,6 +218,11 @@ class GeekCodeCalculator
             var modifier = foundCase.0
             modifier = modifier.withAssociated(category: with, grading: grade)
             result.append(modifier)
+        }
+        
+        
+        if result.isEmpty && !subitem.isEmpty {
+            throw GeekcodingException.unrecognizedToken(subitem)
         }
         
         
@@ -209,7 +238,7 @@ class GeekCodeCalculator
     }
     
     
-    func findOccurences(haystack: String, regex: String) throws -> [String] {
+    private func findOccurences(haystack: String, regex: String) throws -> [String] {
         
         var result = [String]()
         

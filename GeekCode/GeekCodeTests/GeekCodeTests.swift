@@ -12,8 +12,47 @@ class GeekCodeTests: XCTestCase {
     
     let calculator = GeekCodeCalculator()
     
+    
+    func testGeekcodeFromRealWordExample() throws {
+        let example = """
+        -----BEGIN GEEK CODE BLOCK VERSION 5.1-----
+        GCS^/GM^ A++(a?) B_:--:+:-:+ C++(C-) D+:+ CM++(++++)
+        MW11_(++) ULD++++$ MC-- Lbash+++/LC#+/Lj+/Lpy++/Lvb
+        IO+++:---(+) PGP G:exarobibliologist E++ H+ PSG PE
+        TDW+/TEX+++/THRO++++/TMON+++/TOB+++/TSTsnw+++/TSTld+++/
+        TSTdsc-- RPG+++(*)>$ BK+++ KX+++ INTJ-A R-- he/him+++
+        -----END GEEK CODE BLOCK VERSION 5.1-----
+"""
+        let geekcode = try calculator.from(string: example)
+        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_COMPUTER_SCIENCE))
+        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_MATHEMATICS))
+        XCTAssert(geekcode?.notRecognizedTokens.count == 0)
+    }
+    
+    
+    func testGeekcodeEasy() throws {
+        let example = """
+        GCS/GM A++(a?) B_:--:+:-:+ C++(C-) D+:+ CM++(++++)
+        MW11_(++) ULD++++$ MC-- Lbash+++/LC#+/Lj+/Lpy++/Lvb
+        IO+++:---(+) PGP G:exarobibliologist E++ H+ PSG PE
+        RPG+++(*)>$ BK+++ KX+++ R-- he/him+++
+"""
+        let geekcode = try calculator.from(string: example)
+        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_COMPUTER_SCIENCE))
+        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_MATHEMATICS))
+        XCTAssert(geekcode?.notRecognizedTokens.count == 0)
+    }
+    
+    
     func testSpecializationsFrom() throws {
-        var specs = calculator.specializationsFrom(input: "GB/CS/TW")
+        
+        var specs = calculator.specializationsFrom(input: "GCS/GM")
+        XCTAssert(specs?.count == 2)
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_MATHEMATICS))
+
+
+        specs = calculator.specializationsFrom(input: "GB/CS/TW")
         XCTAssert(specs?.count == 3)
         XCTAssert(specs!.contains(GeekCodeSpecialization.BUSINESS_GEEK))
         XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
@@ -74,38 +113,38 @@ class GeekCodeTests: XCTestCase {
     
     func testCategoryItemFrom() throws {
         
-        var item = try calculator.categoryItemFrom(input: "a++", with: .age)
+        var item = try calculator.categoryItemFrom(input: "a++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.age, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
         
-        item = try calculator.categoryItemFrom(input: "d:", with: .dimensions)
+        item = try calculator.categoryItemFrom(input: "d:")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
 
-        item = try calculator.categoryItemFrom(input: "d+:++", with: .dimensions)
+        item = try calculator.categoryItemFrom(input: "d+:++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .plus)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
 
-        item = try calculator.categoryItemFrom(input: "d:---", with: .dimensions)
+        item = try calculator.categoryItemFrom(input: "d:---")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .minusMinusMinus)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
         
-        item = try calculator.categoryItemFrom(input: "C++(C-)", with: .clothing)
+        item = try calculator.categoryItemFrom(input: "C++(C-)")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.clothing, .plusPlus)))
         XCTAssert(item!.modifiersByParts[0].contains(.crossOver(.clothing, .minus)))
         XCTAssert(item!.modifiersByParts.count == 1)
 
 
 //        (Head : Beard : Brows : Mustache : Sideburns
-        item = try calculator.categoryItemFrom(input: "B++:-:+:--(+):+>++", with: .beard)
+        item = try calculator.categoryItemFrom(input: "B++:-:+:--(+):+>++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.beard, .plusPlus)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.beard, .minus)))
         XCTAssert(item!.modifiersByParts[2].contains(.rigid(.beard, .plus)))
@@ -115,25 +154,25 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item!.modifiersByParts[4].contains(.wannabe(.beard, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 5)
         
-        item = try calculator.categoryItemFrom(input: "ul++$", with: .linux)
+        item = try calculator.categoryItemFrom(input: "ul++$")
         XCTAssert(item!.modifiersByParts[0].contains(.professional(.linux, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
                                   
-        item = try calculator.categoryItemFrom(input: "!lj", with: .java)
+        item = try calculator.categoryItemFrom(input: "!lj")
         XCTAssert(item!.modifiersByParts[0].contains(.refuse(.java, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
         
-        item = try calculator.categoryItemFrom(input: "lm?", with: .matlab)
+        item = try calculator.categoryItemFrom(input: "lm?")
         XCTAssert(item!.modifiersByParts[0].contains(.noIdea(.matlab, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
 
-        item = try calculator.categoryItemFrom(input: "lm--^", with: .matlab)
+        item = try calculator.categoryItemFrom(input: "lm--^")
         XCTAssert(item!.modifiersByParts[0].contains(.degree(.matlab, .minusMinus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)

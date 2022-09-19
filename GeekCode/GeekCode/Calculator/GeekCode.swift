@@ -13,6 +13,7 @@ struct GeekCode
 {
     var specs:[GeekCodeSpecialization]?;
     var categories = [GeekCodeCategoryItem]();
+    var notRecognizedTokens = [String]()
 }
 
 struct GeekCodeCategoryItem {
@@ -91,6 +92,8 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case r
     case swift//not added to standard
     case kotlin//not added to standard
+    case bash
+
     
     
     case inputOutput
@@ -225,7 +228,7 @@ enum GeekCodeCategory : CaseIterable, Hashable
         case .dimensions:
             return "d"
         case .computer:
-            return "c"
+            return "cm"
         case .unix:
             return "u"
         case .linux:
@@ -308,6 +311,8 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "lsw"
         case .kotlin:
             return "lko"
+        case .bash:
+            return "lbash"
         case .windows:
             return "mw"
         case .windowsXp:
