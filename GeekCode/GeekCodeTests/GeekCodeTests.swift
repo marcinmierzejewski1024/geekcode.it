@@ -112,13 +112,13 @@ class GeekCodeTests: XCTestCase {
     }
     
     func testCategoryItemFrom() throws {
-        
+
         var item = try calculator.categoryItemFrom(input: "a++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.age, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
-        
+
         item = try calculator.categoryItemFrom(input: "d:")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .normal)))
@@ -136,7 +136,7 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .minusMinusMinus)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
-        
+
         item = try calculator.categoryItemFrom(input: "C++(C-)")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.clothing, .plusPlus)))
         XCTAssert(item!.modifiersByParts[0].contains(.crossOver(.clothing, .minus)))
@@ -153,19 +153,19 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item!.modifiersByParts[4].contains(.rigid(.beard, .plus)))
         XCTAssert(item!.modifiersByParts[4].contains(.wannabe(.beard, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 5)
-        
+
         item = try calculator.categoryItemFrom(input: "ul++$")
         XCTAssert(item!.modifiersByParts[0].contains(.professional(.linux, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
-                                  
+
         item = try calculator.categoryItemFrom(input: "!lj")
         XCTAssert(item!.modifiersByParts[0].contains(.refuse(.java, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
-        
+
         item = try calculator.categoryItemFrom(input: "lm?")
         XCTAssert(item!.modifiersByParts[0].contains(.noIdea(.matlab, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
@@ -176,6 +176,20 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item!.modifiersByParts[0].contains(.degree(.matlab, .minusMinus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
+
+        
+        
+        item = try calculator.categoryItemFrom(input: "they/them+++")
+        XCTAssert(item!.modifiersByParts[0].contains(.rigid(.theyThem, .plusPlusPlus)))
+        XCTAssert(item!.modifiersByParts.count == 1)
+        XCTAssert(item!.modifiersByParts[0].count == 1)
+
+        item = try calculator.categoryItemFrom(input: "lc#*(++)")
+        XCTAssert(item!.modifiersByParts[0].contains(.rigid(.csharp, .weird)))
+        XCTAssert(item!.modifiersByParts[0].contains(.crossOver(.csharp, .plusPlus)))
+
+        XCTAssert(item!.modifiersByParts.count == 1)
+        XCTAssert(item!.modifiersByParts[0].count == 2)
 
 
 

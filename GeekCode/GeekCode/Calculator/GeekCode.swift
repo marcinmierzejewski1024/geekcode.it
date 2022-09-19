@@ -63,7 +63,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case pacman
     case gentoo
     case slackware
-    case other
     case sunosSolaris
     case aix
     case hpux
@@ -93,7 +92,7 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case swift//not added to standard
     case kotlin//not added to standard
     case bash
-
+    
     
     
     case inputOutput
@@ -173,7 +172,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case comicsDilbert
     case comicsXKCD
     case comicsManga
-    case comicsHentai
     
     case residence
     
@@ -261,8 +259,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "ulg"
         case .slackware:
             return "uls"
-        case .other:
-            return "ul*"
         case .sunosSolaris:
             return "us"
         case .aix:
@@ -371,8 +367,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "kx"
         case .comicsManga:
             return "km"
-        case .comicsHentai:
-            return "km!"//not sure about if it should be a separate spec
         case .residence:
             return "r"
         case .sheHer:
@@ -399,7 +393,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return "ae/aer"
         case .ellesElles:
             return "elles/elles"
-            
         }
         
     }
@@ -419,7 +412,7 @@ enum GeekCodeCategory : CaseIterable, Hashable
             return ["head","beard","brows","mustache","sideburns"]
         case .inputOutput:
             return ["input","output"]
-
+            
         default:
             return nil
             

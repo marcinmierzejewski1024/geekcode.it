@@ -109,7 +109,7 @@ class GeekCodeCalculator
         
         let string = input.uppercased();
         
-        let capturePattern = #"(?:[A-Z]+)"#
+        let capturePattern = #"(?:[A-Z#//]+)"#
         let captureRegex = try! NSRegularExpression(
             pattern: capturePattern,
             options: []
