@@ -15,13 +15,29 @@ enum GeekcodingException: Error {
 
 class GeekCodeCalculator
 {
+    
+    private func cleanedString(_ string: String) -> String {
+        let introRegex = "(-){5}(BEGIN|END)+(.*)(-){5}"
+        let regex = try! NSRegularExpression(pattern: introRegex, options: NSRegularExpression.Options.caseInsensitive)
+        let range = NSMakeRange(0, string.count)
+        let withoutIntro = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
+        
+        let replaced = withoutIntro.replacingOccurrences(of: "_", with: "")
+        let condensed = replaced.condensed.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        
+        return condensed
+        
+        
+
+    }
+    
     func from(string:String) throws -> GeekCode? {
         
         var result = GeekCode();
-        let replaced = string.replacingOccurrences(of: "_", with: "")
-        let condensed = replaced.condensed.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleaned = self.cleanedString(string)
 
-        var parts = condensed.components(separatedBy: .whitespaces)
+        var parts = cleaned.components(separatedBy: .whitespaces)
         
         if let firstPart = parts.first {
             if let firstPartResult = self.specializationsFrom(input: firstPart) {

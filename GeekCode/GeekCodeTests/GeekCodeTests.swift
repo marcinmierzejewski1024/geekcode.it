@@ -90,6 +90,12 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
         
         
+        specs = calculator.specializationsFrom(input: "GCS^/GM^")
+        XCTAssert(specs?.count == 2)
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_MATHEMATICS))
+        
+        
     }
     
     
