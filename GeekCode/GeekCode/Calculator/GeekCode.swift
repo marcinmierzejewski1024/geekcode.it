@@ -427,6 +427,7 @@ enum GeekCodeModifier : Hashable
 {
     
     case rigid(GeekCodeCategory?, GeekCodeGrading?)
+    case notVeryRigid(GeekCodeCategory?, GeekCodeGrading?)
     case crossOver(GeekCodeCategory?, GeekCodeGrading?)
     case wannabe(GeekCodeCategory?, GeekCodeGrading?)
     case professional(GeekCodeCategory?, GeekCodeGrading?)
@@ -439,6 +440,8 @@ enum GeekCodeModifier : Hashable
         switch self {
         case .rigid:
             return "%@"
+        case .notVeryRigid:
+            return "%@@"
         case .crossOver:
             return "\\(%@\\)"
         case .wannabe:
@@ -482,7 +485,9 @@ enum GeekCodeModifier : Hashable
             return .noIdea(category, grading)
         case .refuse(_, _):
             return .refuse(category, grading)
-            
+        case .notVeryRigid(_, _):
+            return .notVeryRigid(category, grading)
+
         }
     }
     
@@ -495,6 +500,7 @@ enum GeekCodeModifier : Hashable
             ,.professional(let category, let grading)
             ,.degree(let category, let grading)
             ,.noIdea(let category, let grading)
+            ,.notVeryRigid(let category, let grading)
             ,.refuse(let category, let grading):
             hasher.combine(category)
             hasher.combine(grading)
@@ -552,6 +558,11 @@ enum GeekCodeGrading : String, CaseIterable
 
 enum GeekCodeSpecialization : String, CaseIterable {
     
+    case GEEK_OF_ARTIFICIAL_INTELLIGENCE
+    case GEEK_OF_BIOMEDICAL_ENGINEERING
+    case GEEK_OF_DATA_SCIENCE
+    case GEEK_OF_DEVOPS
+    case GEEK_OF_VIDEO_GAME_DESIGN
     case BUSINESS_GEEK
     case GEEK_OF_THE_CLASSICS
     case GEEK_OF_COMMERCIAL_ART
@@ -650,9 +661,16 @@ enum GeekCodeSpecialization : String, CaseIterable {
             return "AT"
         case .WITHOUT:
             return "!"
-            
-            
-            
+        case .GEEK_OF_ARTIFICIAL_INTELLIGENCE:
+            return "AI"
+        case .GEEK_OF_BIOMEDICAL_ENGINEERING:
+            return "BIO"
+        case .GEEK_OF_DATA_SCIENCE:
+            return "DS"
+        case .GEEK_OF_DEVOPS:
+            return "DVO"
+        case .GEEK_OF_VIDEO_GAME_DESIGN:
+            return "VGD"
         }
     }
 }
