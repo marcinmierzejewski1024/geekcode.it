@@ -111,18 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				5657D69128CE7D1200EBA9B1 /* Utils */,
-				56CF5F8128A001B500040669 /* New Group */,
 				56CF5F7B289FBF9000040669 /* GeekCodeCalculator.swift */,
 				56CF5F7D289FBFA300040669 /* GeekCode.swift */,
 			);
 			path = Calculator;
-			sourceTree = "<group>";
-		};
-		56CF5F8128A001B500040669 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		56CF5F8928A0022400040669 /* GeekCodeTests */ = {
@@ -143,6 +135,7 @@
 				56CF5F65289FBED800040669 /* Sources */,
 				56CF5F66289FBED800040669 /* Frameworks */,
 				56CF5F67289FBED800040669 /* Resources */,
+				567433BA2A803A52009A5DF0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -228,6 +221,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		567433BA2A803A52009A5DF0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/*",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/newOutputFile",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#swiftlint\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		56CF5F65289FBED800040669 /* Sources */ = {

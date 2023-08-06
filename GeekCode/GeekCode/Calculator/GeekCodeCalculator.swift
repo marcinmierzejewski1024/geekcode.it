@@ -13,9 +13,7 @@ enum GeekcodingException: Error {
 }
 
 
-class GeekCodeCalculator
-{
-    
+class GeekCodeCalculator {
     private func cleanedString(_ string: String) -> String {
         let introRegex = "(-){5}(BEGIN|END)+(.*)(-){5}"
         let regex = try! NSRegularExpression(pattern: introRegex, options: NSRegularExpression.Options.caseInsensitive)
@@ -24,19 +22,14 @@ class GeekCodeCalculator
         
         let replaced = withoutIntro.replacingOccurrences(of: "_", with: "")
         let condensed = replaced.condensed.trimmingCharacters(in: .whitespacesAndNewlines)
-
         
         return condensed
-        
-        
-
     }
     
-    func from(string:String) throws -> GeekCode? {
-        
+    func from(string: String) throws -> GeekCode? {
         var result = GeekCode();
         let cleaned = self.cleanedString(string)
-
+        
         var parts = cleaned.components(separatedBy: .whitespaces)
         
         if let firstPart = parts.first {
@@ -57,10 +50,7 @@ class GeekCodeCalculator
             
         }
         
-        
-        
         return result;
-        
     }
     
     func specializationsFrom(input:String) -> [GeekCodeSpecialization]? {
@@ -88,8 +78,6 @@ class GeekCodeCalculator
             range: stringRange
         )
         
-        
-        
         for match in matches {
             for rangeIndex in 0..<match.numberOfRanges {
                 let matchRange = match.range(at: rangeIndex)
@@ -110,19 +98,17 @@ class GeekCodeCalculator
                     var notFoundCandidate = candidate
                     notFoundCandidate.removeFirst()
                     return GeekCodeSpecialization.from(key: notFoundCandidate)
-
+                    
                 }
                 return nil
             }
         })
-        
         
         return result;
     }
     
     
     func categoryFrom(input:String) -> GeekCodeCategory? {
-        
         let string = input.uppercased();
         
         let capturePattern = #"(?:[A-Z#//]+)"#
@@ -141,10 +127,6 @@ class GeekCodeCalculator
             range: stringRange
         )
         
-        
-        
-        
-        
         for match in matches {
             for rangeIndex in 0..<match.numberOfRanges {
                 let matchRange = match.range(at: rangeIndex)
@@ -158,13 +140,11 @@ class GeekCodeCalculator
             }
         }
         
-        
         return nil
     }
     
     
     func categoryItemFrom(input: String) throws -> GeekCodeCategoryItem? {
-        
         guard let category = self.categoryFrom(input: input) else {
             if(!input.isEmpty) {
                 throw GeekcodingException.unrecognizedToken(input)
@@ -216,14 +196,10 @@ class GeekCodeCalculator
                     }
                 }
                 
-                
                 if let occurence = try self.findOccurences(haystack: subitem, regex: caseRegexp).first {
                     print("found potential \(potentialCase)")
                     foundCases.append((potentialCase, occurence))
                 }
-                
-                
-                
             } catch {
                 throw GeekcodingException.otherError(error)
             }
@@ -236,26 +212,18 @@ class GeekCodeCalculator
             result.append(modifier)
         }
         
-        
         if result.isEmpty && !subitem.isEmpty {
             throw GeekcodingException.unrecognizedToken(subitem)
         }
-        
-        
         return result
-        
     }
     
-    
-    
-    func from(gc:GeekCode) -> String {
-        
+    func from(gc: GeekCode) -> String {
         return "";
     }
     
     
     private func findOccurences(haystack: String, regex: String) throws -> [String] {
-        
         var result = [String]()
         
         let captureRegex = try NSRegularExpression(
@@ -277,18 +245,13 @@ class GeekCodeCalculator
         for match in matches {
             for rangeIndex in 0..<match.numberOfRanges {
                 let matchRange = match.range(at: rangeIndex)
-                
                 // Extract the substring matching the capture group
                 if let substringRange = Range(matchRange, in: haystack) {
                     let capture = String(haystack[substringRange])
-                    print("capture",capture)
                     result.append(capture)
                 }
             }
         }
-        
         return result
-        
     }
-    
 }

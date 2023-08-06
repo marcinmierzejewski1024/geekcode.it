@@ -9,8 +9,7 @@ import Foundation
 
 //basedOn https://github.com/telavivmakers/geek_code
 
-struct GeekCode
-{
+struct GeekCode {
     var specs:[GeekCodeSpecialization]?;
     var categories = [GeekCodeCategoryItem]();
     var notRecognizedTokens = [String]()
@@ -21,9 +20,7 @@ struct GeekCodeCategoryItem {
     var modifiersByParts = [[GeekCodeModifier]]()
 }
 
-enum GeekCodeCategory : CaseIterable, Hashable
-{
-    
+enum GeekCodeCategory : CaseIterable, Hashable {
     //appearance
     case age
     case beard
@@ -34,7 +31,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case clothingCrossdresser
     case clothingDontCare
     case dimensions
-    
     
     //computers
     case computer
@@ -93,8 +89,6 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case kotlin//not added to standard
     case bash
     
-    
-    
     case inputOutput
     
     case pgp
@@ -118,63 +112,59 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case politicsEconomic
     
     case tv
-    //    TBBT        =    The Big Bang Theory
-    //    TB5        =    Babylon5
-    //    TDW        =    Doctor Who
-    //    TEX        =    The Expanse
-    //    TFF         =    Firefly
-    //    TGT        =    Game of Thrones
-    //    THRO        =    Heroes
-    //    TI        =    'In search of…' with Leonard Nimoy
-    //    TLV        =    Leverage
-    //        TLVr    =    Leverage: Redemption
-    //    Tmon        =    Monty Python (series/films)
-    //    TMM        =    Mad Max
-    //    TLOTR        =    Lord of the Rings
-    //    TL        =    Lost
-    //    TOB        =    Orphan Black
-    //    TRM         =    rick&MORTY
-    //    TSG        =    Stargate
-    //        TSG1    =    Stargate SG-1
-    //        TSGa    =    Stargate Atlantis
-    //        TSGu    =    Stargate Universe
-    //        TSGoc    =    Stargate Origins Catherine
-    //    TST        =    Star Trek
-    //        TSTanm    =    Star Trek - Animated Series
-    //        TSTng    =    Star Trek - The Next Generation
-    //        TSTds9    =    Star Trek - Deep Space Nine
-    //        TSTv    =    Star Trek - Voyager
-    //        TSTe    =    Star Trek - Enterprise
-    //        TSTdsc    =    Star Trek - Discovery
-    //        TSTpic    =    Star Trek - Picard
-    //        TSTld    =    Star Trek - Lower Decks
-    //        TSTst    =    Star Trek - Short Treks
-    //        TSTpro    =    Star Trek - Prodigy
-    //        TSTsnw    =    Star Trek - Strange New Worlds
-    //    TSW        =    Star Wars
-    //        TSWcw    =    Star Wars Clone Wars
-    //        TSWman    =    The Mandalorian
-    //        TSWand    =    Star Wars - Andor
-    //        TSWobi    =    Star Wars - Obi-Wan Kenobi
-    //        TSWbob    =    Star Wars - Book of Boba Fett
-    //        TSWv    =    Star Wars - Visions
-    //        TSWbb    =    Star Wars - The Bad Batch
-    //        TSWres    =    Star Wars - Resistance
-    //        TSWreb    =    Star Wars - Rebels
-    //    TW13    =    Warehouse 13
-    
+    case tvBigBangTheory
+    case tvBabylon5
+    case tvDoctorWho
+    case tvTheExpanse
+    case tvFirefly
+    case tvGameOfThrones
+    case tvHeroes
+    case tvInSearchOf
+    case tvLeverage
+    case tvLeverageRedemption
+    case tvMontyPython
+    case tvMadMax
+    case tvLordOfTheRings
+    case tvLost
+    case tvOrphanBlack
+    case tvRickAndMorty
+    case tvStargate
+    case tvStargateSG1
+    case tvStargateAtlantis
+    case tvStargateUniverse
+    case tvStargateOriginsCatherine
+    case tvStarTrek
+    case tvStarTrekAnimatedSeries
+    case tvStarTrekTNG
+    case tvStarTrekDS9
+    case tvStarTrekVoyager
+    case tvStarTrekEnterprise
+    case tvStarTrekDiscovery
+    case tvStarTrekPicard
+    case tvStarTrekLowerDecks
+    case tvStarTrekShortTreks
+    case tvStarTrekProdigy
+    case tvStarTrekStrangeNewWorlds
+    case tvStarWars
+    case tvStarWarsCloneWars
+    case tvTheMandalorian
+    case tvStarWarsAndor
+    case tvStarWarsObiWanKenobi
+    case tvStarWarsBookOfBobaFett
+    case tvStarWarsVisions
+    case tvStarWarsBadBatch
+    case tvStarWarsResistance
+    case tvStarWarsRebels
+    case tvWarehouse13
     
     case rpg
-    
     case books
-    
     case comics
     case comicsDilbert
     case comicsXKCD
     case comicsManga
     
     case residence
-    
     
     //sex
     case sheHer
@@ -190,9 +180,7 @@ enum GeekCodeCategory : CaseIterable, Hashable
     case aeAer
     case ellesElles
     
-    
-    static func from(key:String) -> GeekCodeCategory?
-    {
+    static func from(key:String) -> GeekCodeCategory? {
         for catcase in self.allCases {
             if key.lowercased() == catcase.key().lowercased() {
                 return catcase
@@ -200,201 +188,148 @@ enum GeekCodeCategory : CaseIterable, Hashable
         }
         
         return nil;
-        
     }
     
     func key() -> String {
-        
         switch self {
-            
-        case .age:
-            return "a"
-        case .beard:
-            return "b"
-        case .beardMustache:
-            return "bm"
-        case .beardSideburns:
-            return "bs"
-        case .beardBushyEyebrows:
-            return "bb"
-        case .clothing:
-            return "c"
-        case .clothingCrossdresser:
-            return "cx"
-        case .clothingDontCare:
-            return "cpu"
-        case .dimensions:
-            return "d"
-        case .computer:
-            return "cm"
-        case .unix:
-            return "u"
-        case .linux:
-            return "ul"
-        case .rpm:
-            return "ulr"
-        case .cwntos:
-            return "ulrc"
-        case .fedora:
-            return "ulrf"
-        case .opensuse:
-            return "ulro"
-        case .urpmi:
-            return "ulru"
-        case .aptRpm:
-            return "ulra"
-        case .debian:
-            return "uld"
-        case .ubuntu:
-            return "uldu"
-        case .thirdparty:
-            return "uldux"
-        case .mepis:
-            return "uldm"
-        case .knoppix:
-            return "uldk"
-        case .pacman:
-            return "ulp"
-        case .gentoo:
-            return "ulg"
-        case .slackware:
-            return "uls"
-        case .sunosSolaris:
-            return "us"
-        case .aix:
-            return "ua"
-        case .hpux:
-            return "uh"
-        case .irix:
-            return "ui"
-        case .scoUnix:
-            return "uc"
-        case .unixNotListed:
-            return "u*"
-        case .java:
-            return "lj"
-        case .cProgrammingLang:
-            return "lc"
-        case .cplusplus:
-            return "lcpp"
-        case .csharp:
-            return "lc#"
-        case .visualbasic:
-            return "lvb"
-        case .python:
-            return "lp"
-        case .javascript:
-            return "ljs"
-        case .php:
-            return "lphp"
-        case .objectivec:
-            return "loc"
-        case .sql:
-            return "lsql"
-        case .perl:
-            return "lp"
-        case .ruby:
-            return "lru"
-        case .matlab:
-            return "lm"
-        case .assembly:
-            return "lasm"
-        case .go:
-            return "lgo"
-        case .r:
-            return "lr"
-        case .swift:
-            return "lsw"
-        case .kotlin:
-            return "lko"
-        case .bash:
-            return "lbash"
-        case .windows:
-            return "mw"
-        case .windowsXp:
-            return "mwxp"
-        case .windowsVista:
-            return "mwV"
-        case .windows7:
-            return "mw7"
-        case .windows8:
-            return "mw8"
-        case .windows10:
-            return "mw10"
-        case .windows11:
-            return "mw11"
-        case .electronics:
-            return "e"
-        case .macApple:
-            return "mc"
-        case .inputOutput:
-            return "io"
-        case .pgp:
-            return "pgp"
-        case .gitHub:
-            return "g"
-        case .bitBucket:
-            return "gb"
-        case .bitkeeper:
-            return "gbk"
-        case .beanstalk:
-            return "gbn"
-        case .subversion:
-            return "gsvn"
-        case .teamFoundationServer:
-            return "gtfs"
-        case .hardware:
-            return "h"
-        case .politicsGreen:
-            return "psg"
-        case .politicsCivilLiberties:
-            return "psl"
-        case .politicsGender:
-            return  "pss"
-        case .politicsEconomic:
-            return "pe"
-        case .tv:
-            return "t"
-        case .rpg:
-            return "rpg"
-        case .books:
-            return "bk"
-        case .comics:
-            return "k"
-        case .comicsDilbert:
-            return "kd"
-        case .comicsXKCD:
-            return "kx"
-        case .comicsManga:
-            return "km"
-        case .residence:
-            return "r"
-        case .sheHer:
-            return "she/her"
-        case .heHim:
-            return "he/him"
-        case .theyThem:
-            return "they/them"
-        case .zeHir:
-            return "ze/hir"
-        case .zeZir:
-            return "ze/zir"
-        case .xeXem:
-            return "xe/xem"
-        case .verVir:
-            return "ver/vir"
-        case .perPer:
-            return "per/per"
-        case .eyEm:
-            return "ey/em"
-        case .faeFaer:
-            return "fae/faer"
-        case .aeAer:
-            return "ae/aer"
-        case .ellesElles:
-            return "elles/elles"
+        case .age: return "a"
+        case .beard: return "b"
+        case .beardMustache: return "bm"
+        case .beardSideburns: return "bs"
+        case .beardBushyEyebrows: return "bb"
+        case .clothing: return "c"
+        case .clothingCrossdresser: return "cx"
+        case .clothingDontCare: return "cpu"
+        case .dimensions: return "d"
+        case .computer: return "cm"
+        case .unix: return "u"
+        case .linux: return "ul"
+        case .rpm: return "ulr"
+        case .cwntos: return "ulrc"
+        case .fedora: return "ulrf"
+        case .opensuse: return "ulro"
+        case .urpmi: return "ulru"
+        case .aptRpm: return "ulra"
+        case .debian: return "uld"
+        case .ubuntu: return "uldu"
+        case .thirdparty: return "uldux"
+        case .mepis: return "uldm"
+        case .knoppix: return "uldk"
+        case .pacman: return "ulp"
+        case .gentoo: return "ulg"
+        case .slackware: return "uls"
+        case .sunosSolaris: return "us"
+        case .aix: return "ua"
+        case .hpux: return "uh"
+        case .irix: return "ui"
+        case .scoUnix: return "uc"
+        case .unixNotListed: return "u*"
+        case .java: return "lj"
+        case .cProgrammingLang: return "lc"
+        case .cplusplus: return "lcpp"
+        case .csharp: return "lc#"
+        case .visualbasic: return "lvb"
+        case .python: return "lp"
+        case .javascript: return "ljs"
+        case .php: return "lphp"
+        case .objectivec: return "loc"
+        case .sql: return "lsql"
+        case .perl: return "lp"
+        case .ruby: return "lru"
+        case .matlab: return "lm"
+        case .assembly: return "lasm"
+        case .go: return "lgo"
+        case .r: return "lr"
+        case .swift: return "lsw"
+        case .kotlin: return "lko"
+        case .bash: return "lbash"
+        case .windows: return "mw"
+        case .windowsXp: return "mwxp"
+        case .windowsVista: return "mwV"
+        case .windows7: return "mw7"
+        case .windows8: return "mw8"
+        case .windows10: return "mw10"
+        case .windows11: return "mw11"
+        case .electronics: return "e"
+        case .macApple: return "mc"
+        case .inputOutput: return "io"
+        case .pgp: return "pgp"
+        case .gitHub: return "g"
+        case .bitBucket: return "gb"
+        case .bitkeeper: return "gbk"
+        case .beanstalk: return "gbn"
+        case .subversion: return "gsvn"
+        case .teamFoundationServer: return "gtfs"
+        case .hardware: return "h"
+        case .politicsGreen: return "psg"
+        case .politicsCivilLiberties: return "psl"
+        case .politicsGender: return  "pss"
+        case .politicsEconomic: return "pe"
+        case .tv: return "t"
+        case .tvBigBangTheory: return "The Big Bang Theory"
+        case .tvBabylon5: return "Babylon5"
+        case .tvDoctorWho: return "Doctor Who"
+        case .tvTheExpanse: return "The Expanse"
+        case .tvFirefly: return "Firefly"
+        case .tvGameOfThrones: return "Game of Thrones"
+        case .tvHeroes: return "Heroes"
+        case .tvInSearchOf: return "'In search of…' with Leonard Nimoy"
+        case .tvLeverage: return "Leverage"
+        case .tvLeverageRedemption: return "Leverage: Redemption"
+        case .tvMontyPython: return "Monty Python (series/films)"
+        case .tvMadMax: return "Mad Max"
+        case .tvLordOfTheRings: return "Lord of the Rings"
+        case .tvLost: return "Lost"
+        case .tvOrphanBlack: return "Orphan Black"
+        case .tvRickAndMorty: return "rick&MORTY"
+        case .tvStargate: return "Stargate"
+        case .tvStargateSG1: return "Stargate SG-1"
+        case .tvStargateAtlantis: return "Stargate Atlantis"
+        case .tvStargateUniverse: return "Stargate Universe"
+        case .tvStargateOriginsCatherine: return "Stargate Origins Catherine"
+        case .tvStarTrek: return "Star Trek"
+        case .tvStarTrekAnimatedSeries: return "Star Trek - Animated Series"
+        case .tvStarTrekTNG: return "Star Trek - The Next Generation"
+        case .tvStarTrekDS9: return "Star Trek - Deep Space Nine"
+        case .tvStarTrekVoyager: return "Star Trek - Voyager"
+        case .tvStarTrekEnterprise: return "Star Trek - Enterprise"
+        case .tvStarTrekDiscovery: return "Star Trek - Discovery"
+        case .tvStarTrekPicard: return "Star Trek - Picard"
+        case .tvStarTrekLowerDecks: return "Star Trek - Lower Decks"
+        case .tvStarTrekShortTreks: return "Star Trek - Short Treks"
+        case .tvStarTrekProdigy: return "Star Trek - Prodigy"
+        case .tvStarTrekStrangeNewWorlds: return "Star Trek - Strange New Worlds"
+        case .tvStarWars: return "Star Wars"
+        case .tvStarWarsCloneWars: return "Star Wars Clone Wars"
+        case .tvTheMandalorian: return "The Mandalorian"
+        case .tvStarWarsAndor: return "Star Wars - Andor"
+        case .tvStarWarsObiWanKenobi: return "Star Wars - Obi-Wan Kenobi"
+        case .tvStarWarsBookOfBobaFett: return "Star Wars - Book of Boba Fett"
+        case .tvStarWarsVisions: return "Star Wars - Visions"
+        case .tvStarWarsBadBatch: return "Star Wars - The Bad Batch"
+        case .tvStarWarsResistance: return "Star Wars - Resistance"
+        case .tvStarWarsRebels: return "Star Wars - Rebels"
+        case .tvWarehouse13: return "Warehouse 13"
+        case .rpg: return "rpg"
+        case .books: return "bk"
+        case .comics: return "k"
+        case .comicsDilbert: return "kd"
+        case .comicsXKCD: return "kx"
+        case .comicsManga: return "km"
+        case .residence: return "r"
+        case .sheHer: return "she/her"
+        case .heHim: return "he/him"
+        case .theyThem: return "they/them"
+        case .zeHir: return "ze/hir"
+        case .zeZir: return "ze/zir"
+        case .xeXem: return "xe/xem"
+        case .verVir: return "ver/vir"
+        case .perPer: return "per/per"
+        case .eyEm: return "ey/em"
+        case .faeFaer: return "fae/faer"
+        case .aeAer: return "ae/aer"
+        case .ellesElles: return "elles/elles"
         }
-        
     }
     
     func partsNames() -> [String]? {
@@ -404,28 +339,17 @@ enum GeekCodeCategory : CaseIterable, Hashable
             ,.bitkeeper
             ,.beanstalk
             ,.subversion
-            ,.teamFoundationServer:
-            return ["","username"]
-        case .dimensions:
-            return ["height","weight"]
-        case .beard:
-            return ["head","beard","brows","mustache","sideburns"]
-        case .inputOutput:
-            return ["input","output"]
+            ,.teamFoundationServer: return ["","username"]
+        case .dimensions: return ["height","weight"]
+        case .beard: return ["head","beard","brows","mustache","sideburns"]
+        case .inputOutput: return ["input","output"]
             
-        default:
-            return nil
-            
+        default: return nil
         }
     }
-    
-    
 }
 
-
-enum GeekCodeModifier : Hashable
-{
-    
+enum GeekCodeModifier : Hashable {
     case rigid(GeekCodeCategory?, GeekCodeGrading?)
     case notVeryRigid(GeekCodeCategory?, GeekCodeGrading?)
     case crossOver(GeekCodeCategory?, GeekCodeGrading?)
@@ -435,25 +359,16 @@ enum GeekCodeModifier : Hashable
     case noIdea(GeekCodeCategory?, GeekCodeGrading?)
     case refuse(GeekCodeCategory?, GeekCodeGrading?)
     
-    
     func regexForCodeModifier() -> String {
         switch self {
-        case .rigid:
-            return "%@"
-        case .notVeryRigid:
-            return "%@@"
-        case .crossOver:
-            return "\\(%@\\)"
-        case .wannabe:
-            return "\\>%@"
-        case .professional:
-            return "%@\\$"
-        case .degree:
-            return "%@\\^"
-        case .noIdea:
-            return "%@\\?"
-        case .refuse:
-            return "\\!%@"
+        case .rigid: return "%@"
+        case .notVeryRigid: return "%@@"
+        case .crossOver: return "\\(%@\\)"
+        case .wannabe: return "\\>%@"
+        case .professional: return "%@\\$"
+        case .degree: return "%@\\^"
+        case .noIdea: return "%@\\?"
+        case .refuse: return "\\!%@"
         }
     }
     
@@ -471,29 +386,19 @@ enum GeekCodeModifier : Hashable
     
     func withAssociated(category: GeekCodeCategory?, grading: GeekCodeGrading?) -> GeekCodeModifier {
         switch self {
-        case .rigid(_, _):
-            return .rigid(category, grading)
-        case .crossOver(_, _):
-            return .crossOver(category, grading)
-        case .wannabe(_, _):
-            return .wannabe(category, grading)
-        case .professional(_, _):
-            return .professional(category, grading)
-        case .degree(_, _):
-            return .degree(category, grading)
-        case .noIdea(_, _):
-            return .noIdea(category, grading)
-        case .refuse(_, _):
-            return .refuse(category, grading)
-        case .notVeryRigid(_, _):
-            return .notVeryRigid(category, grading)
-
+        case .rigid(_, _): return .rigid(category, grading)
+        case .crossOver(_, _): return .crossOver(category, grading)
+        case .wannabe(_, _): return .wannabe(category, grading)
+        case .professional(_, _): return .professional(category, grading)
+        case .degree(_, _): return .degree(category, grading)
+        case .noIdea(_, _): return .noIdea(category, grading)
+        case .refuse(_, _): return .refuse(category, grading)
+        case .notVeryRigid(_, _): return .notVeryRigid(category, grading)
         }
     }
     
     func hash(into hasher: inout Hasher) {
         switch self {
-            
         case .rigid(let category, let grading)
             ,.crossOver(let category, let grading)
             ,.wannabe(let category, let grading)
@@ -504,15 +409,12 @@ enum GeekCodeModifier : Hashable
             ,.refuse(let category, let grading):
             hasher.combine(category)
             hasher.combine(grading)
-            
         }
         hasher.combine(self.regexForCodeModifier())
     }
-    
 }
 
-enum GeekCodeGrading : String, CaseIterable
-{
+enum GeekCodeGrading : String, CaseIterable {
     case normal
     case plus
     case plusPlus
@@ -528,7 +430,6 @@ enum GeekCodeGrading : String, CaseIterable
     case weirdWeird
     case weirdWeirdWeird
     case weirdWeirdWeirdWeird
-    
     
     static func from(string: String) -> GeekCodeGrading?
     {
@@ -548,52 +449,43 @@ enum GeekCodeGrading : String, CaseIterable
         }
         
         return nil;
-        
     }
-    
 }
 
-
-
-
 enum GeekCodeSpecialization : String, CaseIterable {
-    
-    case GEEK_OF_ARTIFICIAL_INTELLIGENCE
-    case GEEK_OF_BIOMEDICAL_ENGINEERING
-    case GEEK_OF_DATA_SCIENCE
-    case GEEK_OF_DEVOPS
-    case GEEK_OF_VIDEO_GAME_DESIGN
-    case BUSINESS_GEEK
-    case GEEK_OF_THE_CLASSICS
-    case GEEK_OF_COMMERCIAL_ART
-    case GEEK_OF_COMPUTER_SCIENCE
-    case COMMUNICATIONS_GEEK
-    case GEEK_OF_ENGINEERING
-    case EDUCATION_GEEK
-    case GEEK_OF_FINE_ARTS
-    case GEEK_OF_GOVERNMENT
-    case GEEK_OF_HUMANITIES
-    case GEEK_INFORMATION_TECHNOLOGY
-    case GEEK_OF_JURISPRUDENCE
-    case GEEK_OF_LIBRARY_SCIENCE
-    case MASS_COMMUNICATION_GEEK
-    case GEEK_OF_MATHEMATICS
-    case MEDICINE_GEEK
-    case MUSIC_GEEK
-    case GEEK_OF_THE_PERFORMING_ARTS
-    case GEEK_OF_PHILOSOPHY
-    case GEEK_OF_THE_EXACT_SCIENCES
-    case GEEK_OF_SOCIAL_SCIENCES
-    case GEEK_OF_TECHNICAL_MAGAZINE
-    case OTHER_GEEK
-    case UNDECIDED_GEEK
-    case THE_GEEK_OF_EVERYTHING
-    case WITHOUT
-    
-    
+    case geekOfArtificialIntelligence
+    case geekOfBiomedicalEngineering
+    case geekOfDataScience
+    case geekOfDevOps
+    case geekOfVideoGameDesign
+    case businessGeek
+    case geekOfTheClassics
+    case geekOfCommercialArt
+    case geekOfComputerScience
+    case communicationsGeek
+    case geekOfEngineering
+    case educationGeek
+    case geekOfFineArts
+    case geekOfGovernment
+    case geekOfHumanities
+    case geekInformationTechnology
+    case geekOfJurisprudence
+    case geekOfLibraryScience
+    case massCommunicationGeek
+    case geekOfMathematics
+    case medicineGeek
+    case musicGeek
+    case geekOfThePerformingArts
+    case geekOfPhilosophy
+    case geekOfTheExactSciences
+    case geekOfSocialSciences
+    case geekOfTechnicalMagazine
+    case otherGeek
+    case undecidedGeek
+    case theGeekOfEverything
+    case without
     
     func name() -> String {
-        
         return NSLocalizedString(self.rawValue, comment: "");
     }
     
@@ -609,68 +501,37 @@ enum GeekCodeSpecialization : String, CaseIterable {
     
     func key() -> String{
         switch self {
-        case .BUSINESS_GEEK:
-            return "B"
-        case .GEEK_OF_THE_CLASSICS:
-            return "C"
-        case .GEEK_OF_COMMERCIAL_ART:
-            return "CA"
-        case .GEEK_OF_COMPUTER_SCIENCE:
-            return "CS"
-        case .COMMUNICATIONS_GEEK:
-            return "CC"
-        case .GEEK_OF_ENGINEERING:
-            return "E"
-        case .EDUCATION_GEEK:
-            return "ED"
-        case .GEEK_OF_FINE_ARTS:
-            return "FA"
-        case .GEEK_OF_GOVERNMENT:
-            return "G"
-        case .GEEK_OF_HUMANITIES:
-            return "H"
-        case .GEEK_INFORMATION_TECHNOLOGY:
-            return "IT"
-        case .GEEK_OF_JURISPRUDENCE:
-            return "J"
-        case .GEEK_OF_LIBRARY_SCIENCE:
-            return "LS"
-        case .MASS_COMMUNICATION_GEEK:
-            return "MC"
-        case .GEEK_OF_MATHEMATICS:
-            return "M"
-        case .MEDICINE_GEEK:
-            return "MD"
-        case .MUSIC_GEEK:
-            return "MU"
-        case .GEEK_OF_THE_PERFORMING_ARTS:
-            return "PA"
-        case .GEEK_OF_PHILOSOPHY:
-            return "P"
-        case .GEEK_OF_THE_EXACT_SCIENCES:
-            return "S"
-        case .GEEK_OF_SOCIAL_SCIENCES:
-            return "SS"
-        case .GEEK_OF_TECHNICAL_MAGAZINE:
-            return "TW"
-        case .OTHER_GEEK:
-            return "O"
-        case .UNDECIDED_GEEK:
-            return "U"
-        case .THE_GEEK_OF_EVERYTHING:
-            return "AT"
-        case .WITHOUT:
-            return "!"
-        case .GEEK_OF_ARTIFICIAL_INTELLIGENCE:
-            return "AI"
-        case .GEEK_OF_BIOMEDICAL_ENGINEERING:
-            return "BIO"
-        case .GEEK_OF_DATA_SCIENCE:
-            return "DS"
-        case .GEEK_OF_DEVOPS:
-            return "DVO"
-        case .GEEK_OF_VIDEO_GAME_DESIGN:
-            return "VGD"
+        case .businessGeek: return "B"
+        case .geekOfTheClassics: return "C"
+        case .geekOfCommercialArt: return "CA"
+        case .geekOfComputerScience: return "CS"
+        case .communicationsGeek: return "CC"
+        case .geekOfEngineering: return "E"
+        case .educationGeek: return "ED"
+        case .geekOfFineArts: return "FA"
+        case .geekOfGovernment: return "G"
+        case .geekOfHumanities: return "H"
+        case .geekInformationTechnology: return "IT"
+        case .geekOfJurisprudence: return "J"
+        case .geekOfLibraryScience: return "LS"
+        case .massCommunicationGeek: return "MC"
+        case .geekOfMathematics: return "M"
+        case .medicineGeek: return "MD"
+        case .musicGeek: return "MU"
+        case .geekOfThePerformingArts: return "PA"
+        case .geekOfPhilosophy: return "P"
+        case .geekOfTheExactSciences: return "S"
+        case .geekOfSocialSciences: return "SS"
+        case .geekOfTechnicalMagazine: return "TW"
+        case .otherGeek: return "O"
+        case .undecidedGeek: return "U"
+        case .theGeekOfEverything: return "AT"
+        case .without: return "!"
+        case .geekOfArtificialIntelligence: return "AI"
+        case .geekOfBiomedicalEngineering: return "BIO"
+        case .geekOfDataScience: return "DS"
+        case .geekOfDevOps: return "DVO"
+        case .geekOfVideoGameDesign: return "VGD"
         }
     }
 }

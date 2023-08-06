@@ -9,10 +9,8 @@ import XCTest
 @testable import GeekCode
 
 class GeekCodeTests: XCTestCase {
-    
     let calculator = GeekCodeCalculator()
-    
-    
+
     func testGeekcodeFromRealWordExample() throws {
         let example = """
         -----BEGIN GEEK CODE BLOCK VERSION 5.1-----
@@ -24,11 +22,10 @@ class GeekCodeTests: XCTestCase {
         -----END GEEK CODE BLOCK VERSION 5.1-----
 """
         let geekcode = try calculator.from(string: example)
-        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_COMPUTER_SCIENCE))
-        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_MATHEMATICS))
+        XCTAssert(geekcode!.specs!.contains(.geekOfComputerScience))
+        XCTAssert(geekcode!.specs!.contains(.geekOfMathematics))
         XCTAssert(geekcode?.notRecognizedTokens.count == 0)
     }
-    
     
     func testGeekcodeEasy() throws {
         let example = """
@@ -38,67 +35,54 @@ class GeekCodeTests: XCTestCase {
         RPG+++(*)>$ BK+++ KX+++ R-- he/him+++
 """
         let geekcode = try calculator.from(string: example)
-        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_COMPUTER_SCIENCE))
-        XCTAssert(geekcode!.specs!.contains(.GEEK_OF_MATHEMATICS))
+        XCTAssert(geekcode!.specs!.contains(.geekOfComputerScience))
+        XCTAssert(geekcode!.specs!.contains(.geekOfMathematics))
         XCTAssert(geekcode?.notRecognizedTokens.count == 0)
     }
     
-    
     func testSpecializationsFrom() throws {
-        
         var specs = calculator.specializationsFrom(input: "GCS/GM")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_MATHEMATICS))
-
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfComputerScience))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfMathematics))
 
         specs = calculator.specializationsFrom(input: "GB/CS/TW")
         XCTAssert(specs?.count == 3)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.BUSINESS_GEEK))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_TECHNICAL_MAGAZINE))
-        
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.businessGeek))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfComputerScience))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfTechnicalMagazine))
         
         specs = calculator.specializationsFrom(input: "klajfkldjslkW")
         XCTAssert(specs?.count == 0)
         
-        
         specs = calculator.specializationsFrom(input: "GMD/MD/MUAUAUA")
         XCTAssert(specs?.count == 1)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.medicineGeek))
         
         specs = calculator.specializationsFrom(input: "GMD/AT/MUAUAUA")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.medicineGeek))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.theGeekOfEverything))
         
         specs = calculator.specializationsFrom(input: "gat/md/MUAUAUA/")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.THE_GEEK_OF_EVERYTHING))
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.medicineGeek))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.theGeekOfEverything))
         
         specs = calculator.specializationsFrom(input: "G!")
         XCTAssert(specs?.count == 1)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.without))
         
         specs = calculator.specializationsFrom(input: "GMD/!/MUAUAUA")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.MEDICINE_GEEK))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.WITHOUT))
-        
+        XCTAssert(specs!.contains(GeekCodeSpecialization.medicineGeek))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.without))
         
         specs = calculator.specializationsFrom(input: "GCS^/GM^")
         XCTAssert(specs?.count == 2)
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_COMPUTER_SCIENCE))
-        XCTAssert(specs!.contains(GeekCodeSpecialization.GEEK_OF_MATHEMATICS))
-        
-        
-    }
-    
-    
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfComputerScience))
+        XCTAssert(specs!.contains(GeekCodeSpecialization.geekOfMathematics))
+     }
     
     func testCategoryFromInput() throws {
         var category = calculator.categoryFrom(input: "a++")!
@@ -118,36 +102,30 @@ class GeekCodeTests: XCTestCase {
     }
     
     func testCategoryItemFrom() throws {
-
         var item = try calculator.categoryItemFrom(input: "a++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.age, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
-
 
         item = try calculator.categoryItemFrom(input: "d:")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
-
         item = try calculator.categoryItemFrom(input: "d+:++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .plus)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .plusPlus)))
         XCTAssert(item!.modifiersByParts.count == 2)
-
 
         item = try calculator.categoryItemFrom(input: "d:---")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.dimensions, .normal)))
         XCTAssert(item!.modifiersByParts[1].contains(.rigid(.dimensions, .minusMinusMinus)))
         XCTAssert(item!.modifiersByParts.count == 2)
 
-
         item = try calculator.categoryItemFrom(input: "C++(C-)")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.clothing, .plusPlus)))
         XCTAssert(item!.modifiersByParts[0].contains(.crossOver(.clothing, .minus)))
         XCTAssert(item!.modifiersByParts.count == 1)
-
 
 //        (Head : Beard : Brows : Mustache : Sideburns
         item = try calculator.categoryItemFrom(input: "B++:-:+:--(+):+>++")
@@ -165,25 +143,20 @@ class GeekCodeTests: XCTestCase {
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
-
         item = try calculator.categoryItemFrom(input: "!lj")
         XCTAssert(item!.modifiersByParts[0].contains(.refuse(.java, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
-
 
         item = try calculator.categoryItemFrom(input: "lm?")
         XCTAssert(item!.modifiersByParts[0].contains(.noIdea(.matlab, .normal)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
 
-
         item = try calculator.categoryItemFrom(input: "lm--^")
         XCTAssert(item!.modifiersByParts[0].contains(.degree(.matlab, .minusMinus)))
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 1)
-
-        
         
         item = try calculator.categoryItemFrom(input: "they/them+++")
         XCTAssert(item!.modifiersByParts[0].contains(.rigid(.theyThem, .plusPlusPlus)))
@@ -196,15 +169,9 @@ class GeekCodeTests: XCTestCase {
 
         XCTAssert(item!.modifiersByParts.count == 1)
         XCTAssert(item!.modifiersByParts[0].count == 2)
-
-
-
-
     }
     
-    
     func testGradeFromString() throws {
-        
         var grade = GeekCodeGrading.from(string: "a++--")
         XCTAssert(grade == nil)
         
@@ -222,7 +189,5 @@ class GeekCodeTests: XCTestCase {
         
         grade = GeekCodeGrading.from(string: "she/her**")
         XCTAssert(grade == .weirdWeird)
-        
     }
-    
 }
