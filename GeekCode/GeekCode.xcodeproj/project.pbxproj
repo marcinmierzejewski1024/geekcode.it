@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5613FFD22B77C3D10062D72F /* CreateFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613FFD12B77C3D10062D72F /* CreateFormViewModel.swift */; };
+		5613FFD42B77C50E0062D72F /* TypesSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613FFD32B77C50E0062D72F /* TypesSelectionView.swift */; };
+		5613FFD62B77C5600062D72F /* CreateFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613FFD52B77C5600062D72F /* CreateFormView.swift */; };
+		5613FFD92B77C9370062D72F /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613FFD82B77C9370062D72F /* CheckboxToggleStyle.swift */; };
 		5657D69328CE7D2D00EBA9B1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657D69228CE7D2D00EBA9B1 /* String.swift */; };
 		56CF5F6D289FBED800040669 /* GeekCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF5F6C289FBED800040669 /* GeekCodeApp.swift */; };
 		56CF5F6F289FBED800040669 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF5F6E289FBED800040669 /* ContentView.swift */; };
@@ -29,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5613FFD12B77C3D10062D72F /* CreateFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFormViewModel.swift; sourceTree = "<group>"; };
+		5613FFD32B77C50E0062D72F /* TypesSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesSelectionView.swift; sourceTree = "<group>"; };
+		5613FFD52B77C5600062D72F /* CreateFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFormView.swift; sourceTree = "<group>"; };
+		5613FFD82B77C9370062D72F /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		5657D69228CE7D2D00EBA9B1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		56CF5F69289FBED800040669 /* GeekCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeekCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56CF5F6C289FBED800040669 /* GeekCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeekCodeApp.swift; sourceTree = "<group>"; };
@@ -60,6 +68,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5613FFCC2B77BE850062D72F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5613FFD72B77C9280062D72F /* Common */,
+				5613FFCE2B77BEA70062D72F /* DescribeForm */,
+				5613FFCD2B77BE960062D72F /* CreateForm */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5613FFCD2B77BE960062D72F /* CreateForm */ = {
+			isa = PBXGroup;
+			children = (
+				5613FFD02B77BEC00062D72F /* View */,
+				5613FFCF2B77BEB80062D72F /* ViewModel */,
+			);
+			path = CreateForm;
+			sourceTree = "<group>";
+		};
+		5613FFCE2B77BEA70062D72F /* DescribeForm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DescribeForm;
+			sourceTree = "<group>";
+		};
+		5613FFCF2B77BEB80062D72F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5613FFD12B77C3D10062D72F /* CreateFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5613FFD02B77BEC00062D72F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5613FFD32B77C50E0062D72F /* TypesSelectionView.swift */,
+				5613FFD52B77C5600062D72F /* CreateFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5613FFD72B77C9280062D72F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5613FFD82B77C9370062D72F /* CheckboxToggleStyle.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		5657D69128CE7D1200EBA9B1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +148,7 @@
 		56CF5F6B289FBED800040669 /* GeekCode */ = {
 			isa = PBXGroup;
 			children = (
+				5613FFCC2B77BE850062D72F /* App */,
 				56CF5F7A289FBF6A00040669 /* Calculator */,
 				56CF5F6C289FBED800040669 /* GeekCodeApp.swift */,
 				56CF5F6E289FBED800040669 /* ContentView.swift */,
@@ -249,8 +309,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5613FFD22B77C3D10062D72F /* CreateFormViewModel.swift in Sources */,
 				56CF5F7E289FBFA300040669 /* GeekCode.swift in Sources */,
+				5613FFD62B77C5600062D72F /* CreateFormView.swift in Sources */,
 				56CF5F6F289FBED800040669 /* ContentView.swift in Sources */,
+				5613FFD92B77C9370062D72F /* CheckboxToggleStyle.swift in Sources */,
+				5613FFD42B77C50E0062D72F /* TypesSelectionView.swift in Sources */,
 				5657D69328CE7D2D00EBA9B1 /* String.swift in Sources */,
 				56CF5F7C289FBF9000040669 /* GeekCodeCalculator.swift in Sources */,
 				56CF5F6D289FBED800040669 /* GeekCodeApp.swift in Sources */,
